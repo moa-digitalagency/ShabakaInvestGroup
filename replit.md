@@ -1,7 +1,7 @@
 # Shabaka Invest Group - Site Web
 
 ## Overview
-Site web complet pour Shabaka Invest Group, une société de domiciliation et conseils d'entreprise basée à Marrakech.
+Site web complet pour Shabaka Invest Group, une société de domiciliation, création et gestion d'entreprises basée à Marrakech. Accompagne les entrepreneurs, investisseurs et dirigeants au Maroc.
 
 ## Tech Stack
 - **Backend**: Python Flask
@@ -22,7 +22,7 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation et co
 ```
 
 ## Features
-1. **Pages publiques**: Accueil, Services, Domiciliation, Conseils, À Propos, Témoignages, Contact
+1. **Pages publiques**: Accueil, Services, À Propos, Contact
 2. **Admin Panel** (`/admin`): Gestion complète du contenu
    - Services (CRUD)
    - Témoignages
@@ -42,12 +42,24 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation et co
 - **Password**: admin123
 
 ## Services Proposés
-- Domiciliation d'Entreprise
-- Conseils aux Entreprises
-- Gestion de Projet
+1. Domiciliation d'Entreprise
+2. Création & Gestion d'Entreprises
+3. Conseil Stratégique & Business Development
+4. Communication & Image Professionnelle
 
-## Recent Changes
-- Tous les dossiers sortis à la racine (plus de src/)
-- Suppression du service "Nettoyage de Chantier"
-- Changement des couleurs en bleu nuit
-- Structure plate pour une meilleure organisation
+## Navigation
+- Accueil
+- Services
+- À Propos
+- Contact
+
+## Recent Changes (26 Dec 2025)
+- Refonte complète du design et contenu
+- Nouveau hero "Forgez l'avenir de votre entreprise"
+- Navigation simplifiée (4 pages principales)
+- Nouveaux services : Domiciliation, Création, Conseil, Communication
+- Section projets accompagnés sur la page d'accueil
+- Témoignages clients mis à jour
+- Section "Pourquoi nous choisir"
+- Footer modernisé
+- Couleur bleu nuit conservée
