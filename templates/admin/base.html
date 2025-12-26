@@ -73,6 +73,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url_for('admin.projects_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'project' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-folder-open w-5"></i>
+                            <span>Projets</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url_for('admin.contacts_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'contact' in request.endpoint %}bg-secondary-800{% endif %}">
                             <i class="fas fa-envelope w-5"></i>
                             <span>Messages</span>

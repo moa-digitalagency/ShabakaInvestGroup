@@ -89,6 +89,9 @@
         }
     </style>
     {% block extra_head %}{% endblock %}
+    {% if site_settings and site_settings.custom_header_code %}
+    {{ site_settings.custom_header_code | safe }}
+    {% endif %}
 </head>
 <body class="font-sans antialiased bg-white">
     <nav class="bg-white shadow-sm fixed w-full z-50">
@@ -158,9 +161,21 @@
                         Votre partenaire pour la création et la gestion d'entreprises à Marrakech.
                     </p>
                     <div class="flex space-x-3">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-instagram"></i></a>
+                        {% if site_settings and site_settings.facebook %}
+                        <a href="{{ site_settings.facebook }}" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.linkedin %}
+                        <a href="{{ site_settings.linkedin }}" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.instagram %}
+                        <a href="{{ site_settings.instagram }}" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.twitter %}
+                        <a href="{{ site_settings.twitter }}" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.youtube %}
+                        <a href="{{ site_settings.youtube }}" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-youtube"></i></a>
+                        {% endif %}
                     </div>
                 </div>
                 <div>
@@ -222,5 +237,8 @@
         }, 5000);
     </script>
     {% block extra_js %}{% endblock %}
+    {% if site_settings and site_settings.custom_footer_code %}
+    {{ site_settings.custom_footer_code | safe }}
+    {% endif %}
 </body>
 </html>

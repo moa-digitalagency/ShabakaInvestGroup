@@ -115,6 +115,26 @@ class SiteSettings(db.Model):
     whatsapp = db.Column(db.String(30))
     footer_text = db.Column(db.Text)
     google_analytics = db.Column(db.String(50))
+    twitter = db.Column(db.String(300))
+    youtube = db.Column(db.String(300))
+    custom_header_code = db.Column(db.Text)
+    custom_footer_code = db.Column(db.Text)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Project(db.Model):
+    __tablename__ = 'projects'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    slug = db.Column(db.String(100), unique=True, nullable=False)
+    description = db.Column(db.Text)
+    image = db.Column(db.String(500))
+    link = db.Column(db.String(500))
+    category = db.Column(db.String(100))
+    client_name = db.Column(db.String(150))
+    is_featured = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=True)
+    order = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 class HeroSettings(db.Model):

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
-from modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset, HeroSettings
+from modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset, HeroSettings, Project
 from security import verify_password, hash_password, admin_required
 from services import ContactService, SettingsService, HeroService
 from utils import save_uploaded_file, slugify
@@ -253,9 +253,13 @@ def settings():
         site_settings.facebook = request.form.get('facebook')
         site_settings.linkedin = request.form.get('linkedin')
         site_settings.instagram = request.form.get('instagram')
+        site_settings.twitter = request.form.get('twitter')
+        site_settings.youtube = request.form.get('youtube')
         site_settings.whatsapp = request.form.get('whatsapp')
         site_settings.footer_text = request.form.get('footer_text')
         site_settings.google_analytics = request.form.get('google_analytics')
+        site_settings.custom_header_code = request.form.get('custom_header_code')
+        site_settings.custom_footer_code = request.form.get('custom_footer_code')
         
         if 'logo' in request.files:
             file = request.files['logo']
@@ -422,3 +426,92 @@ def hero_edit():
         return redirect(url_for('admin.hero_edit'))
     
     return render_template('admin/hero_form.html', hero=hero, site_settings=site_settings)
+
+@admin_bp.route('/projects')
+@login_required
+@admin_required
+def projects_list():
+    projects = Project.query.order_by(Project.order).all()
+    return render_template('admin/projects_list.html', projects=projects)
+
+@admin_bp.route('/projects/new', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def project_create():
+    if request.method == 'POST':
+        new_slug = slugify(request.form.get('title'))
+        existing = Project.query.filter_by(slug=new_slug).first()
+        if existing:
+            flash('Un projet avec ce titre existe déjà.', 'danger')
+            return render_template('admin/project_form.html', project=None)
+        
+        project = Project(
+            title=request.form.get('title'),
+            slug=new_slug,
+            description=request.form.get('description'),
+            link=request.form.get('link'),
+            category=request.form.get('category'),
+            client_name=request.form.get('client_name'),
+            is_featured=request.form.get('is_featured') == 'on',
+            order=int(request.form.get('order', 0))
+        )
+        
+        if 'image' in request.files:
+            file = request.files['image']
+            if file.filename:
+                filepath = save_uploaded_file(file, 'projects')
+                if filepath:
+                    project.image = '/' + filepath
+        
+        db.session.add(project)
+        db.session.commit()
+        flash('Projet créé avec succès !', 'success')
+        return redirect(url_for('admin.projects_list'))
+    
+    return render_template('admin/project_form.html', project=None)
+
+@admin_bp.route('/projects/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def project_edit(id):
+    project = Project.query.get_or_404(id)
+    
+    if request.method == 'POST':
+        new_slug = slugify(request.form.get('title'))
+        existing = Project.query.filter(Project.slug == new_slug, Project.id != id).first()
+        if existing:
+            flash('Un projet avec ce titre existe déjà.', 'danger')
+            return render_template('admin/project_form.html', project=project)
+        
+        project.title = request.form.get('title')
+        project.slug = new_slug
+        project.description = request.form.get('description')
+        project.link = request.form.get('link')
+        project.category = request.form.get('category')
+        project.client_name = request.form.get('client_name')
+        project.is_featured = request.form.get('is_featured') == 'on'
+        project.is_active = request.form.get('is_active') == 'on'
+        project.order = int(request.form.get('order', 0))
+        
+        if 'image' in request.files:
+            file = request.files['image']
+            if file.filename:
+                filepath = save_uploaded_file(file, 'projects')
+                if filepath:
+                    project.image = '/' + filepath
+        
+        db.session.commit()
+        flash('Projet mis à jour avec succès !', 'success')
+        return redirect(url_for('admin.projects_list'))
+    
+    return render_template('admin/project_form.html', project=project)
+
+@admin_bp.route('/projects/<int:id>/delete', methods=['POST'])
+@login_required
+@admin_required
+def project_delete(id):
+    project = Project.query.get_or_404(id)
+    db.session.delete(project)
+    db.session.commit()
+    flash('Projet supprimé.', 'success')
+    return redirect(url_for('admin.projects_list'))
