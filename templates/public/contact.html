@@ -1,129 +1,116 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero-gradient py-24">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-5xl font-bold text-white mb-6">Discutons de votre projet</h1>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Vous avez un projet de création d'entreprise, de domiciliation ou de développement à Marrakech ? Contactez-nous.</p>
+<section class="py-32 bg-gray-50 relative overflow-hidden">
+    <div class="hero-stripe bg-primary-900 opacity-10 left-0"></div>
+    <div class="hero-stripe bg-primary-600 opacity-10 left-20"></div>
+    <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <span class="section-badge text-primary-900 mb-6">Contact</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 mb-6">Discutons de votre projet</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Vous avez un projet de création d'entreprise, de domiciliation ou de développement à Marrakech ?</p>
     </div>
 </section>
 
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12">
+        <div class="grid md:grid-cols-2 gap-16">
             <div>
-                <h2 class="text-3xl font-bold text-secondary-900 mb-6">Envoyez-nous un message</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-8">Envoyez-nous un message</h2>
                 <form method="POST" action="{{ url_for('public.contact') }}" class="space-y-6">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token is defined else '' }}">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom / Prénom *</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nom / Prénom *</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-600 focus:outline-none">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-600 focus:outline-none">
                         </div>
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+                            <input type="tel" name="phone" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-600 focus:outline-none">
                         </div>
                         <div>
-                            <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Entreprise</label>
-                            <input type="text" id="company" name="company" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Type de projet</label>
+                            <select name="service_interest" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-600 focus:outline-none">
+                                <option value="">Sélectionnez</option>
+                                <option value="creation">Création d'entreprise</option>
+                                <option value="domiciliation">Domiciliation</option>
+                                <option value="developpement">Développement</option>
+                                <option value="autre">Autre</option>
+                            </select>
                         </div>
                     </div>
                     <div>
-                        <label for="service_interest" class="block text-sm font-medium text-gray-700 mb-2">Type de projet</label>
-                        <select id="service_interest" name="service_interest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <option value="">Sélectionnez un type de projet</option>
-                            <option value="creation">Création d'entreprise</option>
-                            <option value="domiciliation">Domiciliation</option>
-                            <option value="developpement">Développement / Conseil</option>
-                            <option value="communication">Communication / Marketing</option>
-                            <option value="autre">Autre</option>
-                        </select>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                        <textarea name="message" rows="5" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-600 focus:outline-none" placeholder="Décrivez votre projet..."></textarea>
                     </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message détaillé *</label>
-                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Décrivez votre projet, vos besoins et vos objectifs..."></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-primary-600 text-white py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg">
-                        <i class="fas fa-paper-plane mr-2"></i>Envoyer ma demande
+                    <button type="submit" class="w-full nav-btn text-white py-4 rounded-xl font-semibold hover:opacity-90 transition">
+                        Envoyer ma demande
                     </button>
                 </form>
             </div>
             <div>
-                <h2 class="text-3xl font-bold text-secondary-900 mb-6">Nos Coordonnées</h2>
-                <div class="bg-gray-50 rounded-2xl p-8 mb-8">
-                    <div class="space-y-6">
-                        {% if site_settings %}
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-primary-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-secondary-900 mb-1">Adresse</h3>
-                                <p class="text-gray-600">{{ site_settings.address }}</p>
-                            </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-8">Nos Coordonnées</h2>
+                <div class="space-y-6 mb-8">
+                    {% if site_settings %}
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-primary-600"></i>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-phone text-primary-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-secondary-900 mb-1">Téléphone</h3>
-                                <p class="text-gray-600">{{ site_settings.phone }}</p>
-                            </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Adresse</h3>
+                            <p class="text-gray-600">{{ site_settings.address }}</p>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-envelope text-primary-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-secondary-900 mb-1">Email</h3>
-                                <p class="text-gray-600">{{ site_settings.email }}</p>
-                            </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-primary-600"></i>
                         </div>
-                        {% endif %}
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-clock text-primary-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-secondary-900 mb-1">Horaires</h3>
-                                <p class="text-gray-600">Lundi - Vendredi : 9h - 18h</p>
-                            </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Téléphone</h3>
+                            <p class="text-gray-600">{{ site_settings.phone }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Email</h3>
+                            <p class="text-gray-600">{{ site_settings.email }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-clock text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-1">Horaires</h3>
+                            <p class="text-gray-600">Lundi - Vendredi : 9h - 18h</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-primary-50 rounded-2xl p-8">
-                    <h3 class="font-bold text-secondary-900 mb-4">Suivez-nous</h3>
-                    <p class="text-gray-600 mb-4">Découvrez nos actualités, conseils et retours d'expérience d'entrepreneurs.</p>
-                    <div class="flex space-x-4">
-                        {% if site_settings and site_settings.facebook %}
-                        <a href="{{ site_settings.facebook }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="font-bold text-gray-900 mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        {% endif %}
-                        {% if site_settings and site_settings.linkedin %}
-                        <a href="{{ site_settings.linkedin }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                        <a href="#" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        {% endif %}
-                        {% if site_settings and site_settings.instagram %}
-                        <a href="{{ site_settings.instagram }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                        <a href="#" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        {% endif %}
-                        {% if site_settings and site_settings.whatsapp %}
-                        <a href="https://wa.me/{{ site_settings.whatsapp }}" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition">
+                        <a href="#" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        {% endif %}
                     </div>
                 </div>
             </div>

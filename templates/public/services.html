@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="hero-gradient py-24">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-5xl font-bold text-white mb-6">Nos Services</h1>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Des solutions complètes pour les entrepreneurs et entreprises à Marrakech et au Maroc.</p>
+<section class="py-32 bg-gray-50 relative overflow-hidden">
+    <div class="hero-stripe bg-primary-900 opacity-10 left-0"></div>
+    <div class="hero-stripe bg-primary-600 opacity-10 left-20"></div>
+    <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <span class="section-badge text-primary-900 mb-6">Nos Services</span>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 mb-6">Solutions complètes pour les entrepreneurs</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">De la création à la gestion, nous mettons en place des solutions sur mesure pour votre entreprise.</p>
     </div>
 </section>
 
@@ -12,21 +15,21 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid md:grid-cols-2 gap-8">
             {% for service in services %}
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition group">
-                <div class="h-48 overflow-hidden bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center">
-                    <i class="fas fa-{{ service.icon or 'briefcase' }} text-6xl text-primary-600 group-hover:scale-110 transition"></i>
+            <div class="service-card bg-white rounded-xl p-8 flex items-start space-x-6">
+                <div class="w-20 h-20 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-{{ service.icon or 'briefcase' }} text-3xl text-primary-600"></i>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-secondary-900 mb-4">{{ service.name }}</h3>
-                    <p class="text-gray-600 mb-6">{{ service.short_description }}</p>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ service.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ service.short_description }}</p>
                     {% if service.features %}
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        {% for feature in service.features.split(',')[:4] %}
-                        <span class="bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm">{{ feature.strip() }}</span>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {% for feature in service.features.split(',')[:3] %}
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">{{ feature.strip() }}</span>
                         {% endfor %}
                     </div>
                     {% endif %}
-                    <a href="{{ url_for('public.service_detail', slug=service.slug) }}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
+                    <a href="{{ url_for('public.service_detail', slug=service.slug) }}" class="text-primary-600 font-medium hover:text-primary-800 inline-flex items-center">
                         En savoir plus <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -39,40 +42,40 @@
 <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Notre approche</span>
-            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Comment nous travaillons</h2>
+            <span class="section-badge text-primary-900">Notre approche</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-4 mb-4">Comment nous travaillons</h2>
         </div>
         <div class="grid md:grid-cols-4 gap-8">
             <div class="text-center">
-                <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">1</div>
-                <h3 class="text-xl font-bold text-secondary-900 mb-2">Écoute</h3>
-                <p class="text-gray-600">Nous comprenons vos besoins et objectifs lors d'un premier échange.</p>
+                <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold">1</div>
+                <h3 class="font-bold text-gray-900 mb-2">Écoute</h3>
+                <p class="text-gray-600 text-sm">Nous comprenons vos besoins lors d'un premier échange.</p>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">2</div>
-                <h3 class="text-xl font-bold text-secondary-900 mb-2">Diagnostic</h3>
-                <p class="text-gray-600">Nous analysons votre situation et identifions les meilleures solutions.</p>
+                <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold">2</div>
+                <h3 class="font-bold text-gray-900 mb-2">Diagnostic</h3>
+                <p class="text-gray-600 text-sm">Nous analysons votre situation.</p>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">3</div>
-                <h3 class="text-xl font-bold text-secondary-900 mb-2">Action</h3>
-                <p class="text-gray-600">Nous mettons en œuvre les solutions avec rigueur et efficacité.</p>
+                <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold">3</div>
+                <h3 class="font-bold text-gray-900 mb-2">Action</h3>
+                <p class="text-gray-600 text-sm">Nous mettons en œuvre les solutions.</p>
             </div>
             <div class="text-center">
-                <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">4</div>
-                <h3 class="text-xl font-bold text-secondary-900 mb-2">Suivi</h3>
-                <p class="text-gray-600">Nous assurons un accompagnement continu pour votre réussite.</p>
+                <div class="w-16 h-16 bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold">4</div>
+                <h3 class="font-bold text-gray-900 mb-2">Suivi</h3>
+                <p class="text-gray-600 text-sm">Nous assurons un accompagnement continu.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-20 bg-primary-600">
+<section class="py-16 bg-primary-900">
     <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold text-white mb-6">Besoin d'un service personnalisé ?</h2>
-        <p class="text-xl text-primary-100 mb-8">Contactez-nous pour discuter de vos besoins spécifiques. Nous vous proposerons une solution adaptée.</p>
-        <a href="{{ url_for('public.contact') }}" class="inline-flex items-center bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition font-semibold text-lg">
-            <i class="fas fa-phone mr-2"></i>Nous Contacter
+        <h2 class="text-3xl font-bold text-white mb-6">Besoin d'un service personnalisé ?</h2>
+        <p class="text-primary-200 mb-8">Contactez-nous pour discuter de vos besoins spécifiques.</p>
+        <a href="{{ url_for('public.contact') }}" class="inline-flex items-center bg-white text-primary-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition">
+            Nous Contacter
         </a>
     </div>
 </section>

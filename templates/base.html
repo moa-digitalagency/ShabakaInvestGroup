@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if seo %}
-    <title>{{ seo.meta_title or 'Shabaka Invest Group - Domiciliation et Conseils d\'Entreprise à Marrakech' }}</title>
-    <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group offre des services de domiciliation d\'entreprise et conseils aux entreprises à Marrakech.' }}">
-    <meta name="keywords" content="{{ seo.keywords or 'domiciliation, marrakech, entreprise, conseils' }}">
-    <meta property="og:title" content="{{ seo.og_title or seo.meta_title }}">
-    <meta property="og:description" content="{{ seo.og_description or seo.meta_description }}">
-    {% if seo.og_image %}<meta property="og:image" content="{{ seo.og_image }}">{% endif %}
-    {% if seo.canonical_url %}<link rel="canonical" href="{{ seo.canonical_url }}">{% endif %}
-    <meta name="robots" content="{{ seo.robots or 'index, follow' }}">
+    <title>{{ seo.meta_title or 'Shabaka Invest Group - Domiciliation et Création d\'Entreprise à Marrakech' }}</title>
+    <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group - Domiciliation, création et gestion d\'entreprises à Marrakech.' }}">
+    <meta name="keywords" content="{{ seo.keywords or 'domiciliation, marrakech, entreprise, création' }}">
     {% else %}
     <title>{% block title %}Shabaka Invest Group{% endblock %}</title>
-    <meta name="description" content="Shabaka Invest Group - Domiciliation d'entreprise et conseils aux entreprises à Marrakech">
+    <meta name="description" content="Shabaka Invest Group - Domiciliation et création d'entreprises à Marrakech">
     {% endif %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -36,75 +31,73 @@
                             800: '#1e2796',
                             900: '#0d1a5e',
                         },
-                        secondary: {
-                            50: '#f6f7f9',
-                            100: '#eceef2',
-                            200: '#d5dae2',
-                            300: '#b0bac8',
-                            400: '#8595a9',
-                            500: '#66788f',
-                            600: '#516076',
-                            700: '#434e60',
-                            800: '#3a4351',
-                            900: '#1e2433',
+                        accent: {
+                            light: '#e8f5e9',
+                            DEFAULT: '#4CAF50',
+                            lime: '#c6ff00'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, #0d1a5e 0%, #1e2796 100%);
+        .hero-stripe {
+            position: absolute;
+            height: 100%;
+            width: 80px;
+            transform: skewX(-15deg);
+        }
+        .service-card {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
         }
         .service-card:hover {
-            transform: translateY(-5px);
+            border-color: #0d1a5e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        .nav-link {
-            position: relative;
+        .nav-btn {
+            background: linear-gradient(135deg, #0d1a5e 0%, #1e2796 100%);
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #5a6cff;
-            transition: width 0.3s;
-        }
-        .nav-link:hover::after {
-            width: 100%;
+        .section-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border: 2px solid #0d1a5e;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="font-sans antialiased bg-gray-50">
-    <nav class="bg-white shadow-lg fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<body class="font-sans antialiased bg-white">
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-20">
                 <div class="flex items-center">
-                    <a href="{{ url_for('public.home') }}" class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">S</span>
+                    <a href="{{ url_for('public.home') }}" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-primary-900 rounded flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">S</span>
                         </div>
-                        <div>
-                            <span class="text-xl font-bold text-secondary-900">Shabaka</span>
-                            <span class="text-xl font-bold text-primary-600">Invest</span>
-                        </div>
+                        <span class="text-xl font-bold text-gray-900">SHABAKA</span>
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url_for('public.home') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Accueil</a>
-                    <a href="{{ url_for('public.services') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Services</a>
-                    <a href="{{ url_for('public.about') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">À Propos</a>
-                    <a href="{{ url_for('public.contact') }}" class="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition font-medium">Contact</a>
+                    <a href="{{ url_for('public.home') }}" class="text-gray-700 hover:text-primary-900 font-medium">Accueil</a>
+                    <a href="{{ url_for('public.about') }}" class="text-gray-700 hover:text-primary-900 font-medium">À Propos</a>
+                    <a href="{{ url_for('public.services') }}" class="text-gray-700 hover:text-primary-900 font-medium">Services</a>
+                    <a href="{{ url_for('public.contact') }}" class="text-gray-700 hover:text-primary-900 font-medium">Contact</a>
+                    <a href="{{ url_for('public.contact') }}" class="nav-btn text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
+                        Demander un Devis <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-secondary-700 hover:text-primary-600">
+                    <button id="mobile-menu-btn" class="text-gray-700">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -112,10 +105,10 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-4 space-y-3">
-                <a href="{{ url_for('public.home') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Accueil</a>
-                <a href="{{ url_for('public.services') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Services</a>
-                <a href="{{ url_for('public.about') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">À Propos</a>
-                <a href="{{ url_for('public.contact') }}" class="block bg-primary-600 text-white px-6 py-2.5 rounded-lg text-center hover:bg-primary-700 transition font-medium">Contact</a>
+                <a href="{{ url_for('public.home') }}" class="block text-gray-700 font-medium py-2">Accueil</a>
+                <a href="{{ url_for('public.about') }}" class="block text-gray-700 font-medium py-2">À Propos</a>
+                <a href="{{ url_for('public.services') }}" class="block text-gray-700 font-medium py-2">Services</a>
+                <a href="{{ url_for('public.contact') }}" class="block nav-btn text-white px-6 py-3 rounded-full text-center font-medium">Contact</a>
             </div>
         </div>
     </nav>
@@ -124,7 +117,7 @@
     {% if messages %}
     <div class="fixed top-24 right-4 z-50 space-y-2">
         {% for category, message in messages %}
-        <div class="flash-message bg-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-100 border border-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-400 text-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-700 px-4 py-3 rounded-lg shadow-lg max-w-md">
+        <div class="flash-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-lg max-w-md">
             {{ message }}
         </div>
         {% endfor %}
@@ -136,70 +129,66 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-secondary-900 text-white mt-20">
+    <footer class="bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 py-16">
             <div class="grid md:grid-cols-4 gap-8">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">S</span>
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary-600 rounded flex items-center justify-center">
+                            <span class="text-white font-bold">S</span>
                         </div>
-                        <div>
-                            <span class="text-xl font-bold">Shabaka</span>
-                            <span class="text-xl font-bold text-primary-500">Invest</span>
-                        </div>
+                        <span class="text-xl font-bold">SHABAKA</span>
                     </div>
-                    <p class="text-gray-400 mb-6 max-w-md">
-                        {{ site_settings.footer_text if site_settings else 'Votre partenaire de confiance pour la domiciliation et le développement de votre entreprise à Marrakech.' }}
+                    <p class="text-gray-400 mb-6 text-sm">
+                        Votre partenaire pour la création et la gestion d'entreprises à Marrakech.
                     </p>
-                    <div class="flex space-x-4">
-                        {% if site_settings and site_settings.facebook %}
-                        <a href="{{ site_settings.facebook }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
-                        {% endif %}
-                        {% if site_settings and site_settings.linkedin %}
-                        <a href="{{ site_settings.linkedin }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-linkedin-in"></i></a>
-                        {% endif %}
-                        {% if site_settings and site_settings.instagram %}
-                        <a href="{{ site_settings.instagram }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-instagram"></i></a>
-                        {% endif %}
-                        {% if site_settings and site_settings.whatsapp %}
-                        <a href="https://wa.me/{{ site_settings.whatsapp }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-whatsapp"></i></a>
-                        {% endif %}
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Services</h4>
-                    <ul class="space-y-3">
-                        <li><a href="{{ url_for('public.services') }}" class="text-gray-400 hover:text-primary-500 transition">Tous nos services</a></li>
-                        <li><a href="{{ url_for('public.about') }}" class="text-gray-400 hover:text-primary-500 transition">À propos</a></li>
-                        <li><a href="{{ url_for('public.contact') }}" class="text-gray-400 hover:text-primary-500 transition">Contact</a></li>
+                    <h4 class="font-semibold mb-4">À Propos</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="{{ url_for('public.about') }}" class="hover:text-white transition">Notre Équipe</a></li>
+                        <li><a href="{{ url_for('public.about') }}" class="hover:text-white transition">Notre Mission</a></li>
+                        <li><a href="{{ url_for('public.contact') }}" class="hover:text-white transition">Carrières</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-3 text-gray-400">
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="{{ url_for('public.services') }}" class="hover:text-white transition">Domiciliation</a></li>
+                        <li><a href="{{ url_for('public.services') }}" class="hover:text-white transition">Création d'entreprise</a></li>
+                        <li><a href="{{ url_for('public.services') }}" class="hover:text-white transition">Conseil stratégique</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
                         {% if site_settings %}
                         <li class="flex items-start space-x-2">
-                            <i class="fas fa-map-marker-alt mt-1 text-primary-500"></i>
+                            <i class="fas fa-map-marker-alt mt-1"></i>
                             <span>{{ site_settings.address }}</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <i class="fas fa-phone text-primary-500"></i>
+                            <i class="fas fa-phone"></i>
                             <span>{{ site_settings.phone }}</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <i class="fas fa-envelope text-primary-500"></i>
+                            <i class="fas fa-envelope"></i>
                             <span>{{ site_settings.email }}</span>
                         </li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-secondary-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">&copy; {{ 'now' | default('2024') }} Shabaka Invest Group. Tous droits réservés.</p>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2025 Shabaka Invest Group. Tous droits réservés.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="{{ url_for('public.legal') }}" class="text-gray-400 hover:text-primary-500 text-sm transition">Mentions Légales</a>
-                    <a href="{{ url_for('admin.login') }}" class="text-gray-400 hover:text-primary-500 text-sm transition">Admin</a>
+                    <a href="{{ url_for('public.legal') }}" class="text-gray-400 hover:text-white text-sm transition">Mentions Légales</a>
+                    <a href="{{ url_for('admin.login') }}" class="text-gray-400 hover:text-white text-sm transition">Admin</a>
                 </div>
             </div>
         </div>
