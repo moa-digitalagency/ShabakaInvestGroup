@@ -78,3 +78,9 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 - **Layout responsive**: 2 colonnes desktop, 1 colonne mobile
 - **Parallax background** avec fixed attachment
 - **Centrage parfait**: Espaces égaux gauche/droite dans le container
+
+### Admin Panel - Hero Customization
+- **HeroSettings Model**: Stocke badge_text, title_main, title_highlight, subtitle, background_image, btn1/btn2 config, et 3 métriques
+- **Route /admin/hero**: Interface complète pour personnaliser tous les éléments du hero
+- **Données dynamiques**: Le hero utilise les données de la base de données avec fallback defaults
+- **WhatsApp Integration**: Bouton "Devis Gratuit" lié à WhatsApp avec numéro configurable dans les paramètres du site (site_settings.whatsapp)
