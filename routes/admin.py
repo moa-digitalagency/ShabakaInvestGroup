@@ -268,6 +268,13 @@ def settings():
                 if filepath:
                     site_settings.logo = '/' + filepath
         
+        if 'favicon' in request.files:
+            file = request.files['favicon']
+            if file.filename:
+                filepath = save_uploaded_file(file, 'branding')
+                if filepath:
+                    site_settings.favicon = '/' + filepath
+        
         db.session.commit()
         flash('Paramètres mis à jour !', 'success')
         return redirect(url_for('admin.settings'))

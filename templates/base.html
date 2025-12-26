@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if site_settings and site_settings.favicon %}
+    <link rel="icon" type="image/x-icon" href="{{ site_settings.favicon }}">
+    {% endif %}
     {% if seo %}
     <title>{{ seo.meta_title or 'Shabaka Invest Group - Domiciliation et Création d\'Entreprise à Marrakech' }}</title>
     <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group - Domiciliation, création et gestion d\'entreprises à Marrakech.' }}">

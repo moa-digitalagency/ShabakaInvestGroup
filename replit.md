@@ -97,3 +97,10 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
   - Code personnalisé dans le `<head>` (Google Tag Manager, Pixel Facebook, etc.)
   - Code personnalisé avant `</body>` (chatbots, scripts de tracking)
 - **Footer dynamique**: Les icônes des réseaux sociaux s'affichent uniquement si configurés
+- **Logo & Favicon**: Upload avec prévisualisation dans les paramètres
+
+### Déploiement - init_db.py
+- Script d'initialisation de la base de données pour déploiement
+- Crée toutes les tables, l'admin par défaut, les services, témoignages, et paramètres
+- Usage: `python init_db.py`
+- Identifiants admin par défaut: admin@shabakainvest.com / admin123
