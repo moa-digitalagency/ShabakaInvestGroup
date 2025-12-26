@@ -1,0 +1,47 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}SEO{% endblock %}
+{% block page_title %}Gestion du SEO{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <table class="w-full">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Page</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Meta Title</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Meta Description</th>
+                <th class="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% set page_names = {'home': 'Accueil', 'services': 'Services', 'cleaning': 'Nettoyage Chantier', 'domiciliation': 'Domiciliation', 'consulting': 'Conseils', 'about': 'À Propos', 'contact': 'Contact', 'testimonials': 'Témoignages'} %}
+            {% for page in pages %}
+            {% set seo = seo_settings | selectattr('page_type', 'equalto', page) | first %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium text-secondary-900">{{ page_names.get(page, page) }}</td>
+                <td class="px-6 py-4 text-gray-600">
+                    {% if seo and seo.meta_title %}
+                    <span class="text-green-600"><i class="fas fa-check mr-1"></i></span>{{ seo.meta_title[:40] }}...
+                    {% else %}
+                    <span class="text-gray-400">Non défini</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-gray-600">
+                    {% if seo and seo.meta_description %}
+                    <span class="text-green-600"><i class="fas fa-check mr-1"></i></span>{{ seo.meta_description[:50] }}...
+                    {% else %}
+                    <span class="text-gray-400">Non défini</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="{{ url_for('admin.seo_edit', page_type=page) }}" class="text-blue-600 hover:text-blue-700">
+                        <i class="fas fa-edit mr-1"></i>Modifier
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

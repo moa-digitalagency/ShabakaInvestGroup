@@ -1,0 +1,72 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ 'Modifier' if testimonial else 'Nouveau' }} Témoignage{% endblock %}
+{% block page_title %}{{ 'Modifier' if testimonial else 'Nouveau' }} Témoignage{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-lg font-bold text-secondary-900 mb-6">Informations du témoignage</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="author_name" class="block text-sm font-medium text-gray-700 mb-2">Nom de l'auteur *</label>
+                    <input type="text" id="author_name" name="author_name" required value="{{ testimonial.author_name if testimonial else '' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="author_company" class="block text-sm font-medium text-gray-700 mb-2">Entreprise</label>
+                    <input type="text" id="author_company" name="author_company" value="{{ testimonial.author_company if testimonial else '' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <label for="author_position" class="block text-sm font-medium text-gray-700 mb-2">Poste</label>
+                <input type="text" id="author_position" name="author_position" value="{{ testimonial.author_position if testimonial else '' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+            </div>
+            
+            <div class="mt-6">
+                <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Témoignage *</label>
+                <textarea id="content" name="content" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ testimonial.content if testimonial else '' }}</textarea>
+            </div>
+            
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="rating" class="block text-sm font-medium text-gray-700 mb-2">Note</label>
+                    <select id="rating" name="rating" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        {% for i in range(5, 0, -1) %}
+                        <option value="{{ i }}" {% if testimonial and testimonial.rating == i %}selected{% endif %}>{{ i }} étoile{{ 's' if i > 1 else '' }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="author_image" class="block text-sm font-medium text-gray-700 mb-2">Photo de l'auteur</label>
+                    <input type="file" id="author_image" name="author_image" accept="image/*" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                </div>
+            </div>
+            
+            <div class="mt-6 flex space-x-6">
+                <div class="flex items-center">
+                    <input type="checkbox" id="is_featured" name="is_featured" {% if testimonial and testimonial.is_featured %}checked{% endif %} class="w-4 h-4 text-primary-600 rounded">
+                    <label for="is_featured" class="ml-2 text-sm text-gray-700">En vedette</label>
+                </div>
+                {% if testimonial %}
+                <div class="flex items-center">
+                    <input type="checkbox" id="is_active" name="is_active" {% if testimonial.is_active %}checked{% endif %} class="w-4 h-4 text-primary-600 rounded">
+                    <label for="is_active" class="ml-2 text-sm text-gray-700">Actif</label>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="flex justify-between">
+            <a href="{{ url_for('admin.testimonials_list') }}" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                Annuler
+            </a>
+            <button type="submit" class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition">
+                {{ 'Mettre à jour' if testimonial else 'Créer le témoignage' }}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

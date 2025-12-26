@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %} - Shabaka Invest Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fef7ee',
+                            100: '#fdeed7',
+                            500: '#ec7d1f',
+                            600: '#dd6315',
+                            700: '#b74a13',
+                        },
+                        secondary: {
+                            800: '#3a4351',
+                            900: '#1e2433',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-100">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-secondary-900 text-white flex-shrink-0">
+            <div class="p-6 border-b border-secondary-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <span class="font-bold">S</span>
+                    </div>
+                    <div>
+                        <span class="font-bold">Shabaka</span>
+                        <span class="text-primary-500">Admin</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ url_for('admin.dashboard') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if request.endpoint == 'admin.dashboard' %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-home w-5"></i>
+                            <span>Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.services_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'service' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-briefcase w-5"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.testimonials_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'testimonial' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-comment-dots w-5"></i>
+                            <span>Témoignages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.contacts_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'contact' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.media_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'media' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-image w-5"></i>
+                            <span>Médias</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.seo_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'seo' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-search w-5"></i>
+                            <span>SEO</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.settings') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'settings' in request.endpoint %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Paramètres</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="absolute bottom-0 w-64 p-4 border-t border-secondary-800">
+                <a href="{{ url_for('public.home') }}" class="flex items-center space-x-3 px-4 py-2 text-gray-400 hover:text-white transition">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Voir le site</span>
+                </a>
+                <a href="{{ url_for('admin.logout') }}" class="flex items-center space-x-3 px-4 py-2 text-gray-400 hover:text-white transition">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="flex-1 overflow-y-auto">
+            <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-secondary-900">{% block page_title %}Dashboard{% endblock %}</h1>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('admin.profile') }}" class="flex items-center space-x-2 text-gray-600 hover:text-primary-600">
+                        <i class="fas fa-user-circle text-2xl"></i>
+                        <span>{{ current_user.name }}</span>
+                    </a>
+                </div>
+            </header>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="px-8 pt-4">
+                {% for category, message in messages %}
+                <div class="mb-2 p-4 rounded-lg {% if category == 'success' %}bg-green-100 text-green-700{% elif category == 'danger' %}bg-red-100 text-red-700{% elif category == 'warning' %}bg-yellow-100 text-yellow-700{% else %}bg-blue-100 text-blue-700{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            <div class="p-8">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

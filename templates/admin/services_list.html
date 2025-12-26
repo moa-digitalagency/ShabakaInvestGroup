@@ -1,0 +1,72 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Services{% endblock %}
+{% block page_title %}Gestion des Services{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <p class="text-gray-600">Gérez vos services et prestations</p>
+    <a href="{{ url_for('admin.service_create') }}" class="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition">
+        <i class="fas fa-plus mr-2"></i>Nouveau Service
+    </a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm overflow-hidden">
+    <table class="w-full">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Ordre</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Service</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Slug</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">En vedette</th>
+                <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Actif</th>
+                <th class="px-6 py-4 text-right text-sm font-medium text-gray-500">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for service in services %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-gray-600">{{ service.order }}</td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-{{ service.icon or 'briefcase' }} text-primary-600"></i>
+                        </div>
+                        <span class="font-medium text-secondary-900">{{ service.name }}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-gray-600">{{ service.slug }}</td>
+                <td class="px-6 py-4">
+                    {% if service.is_featured %}
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">Oui</span>
+                    {% else %}
+                    <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">Non</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4">
+                    {% if service.is_active %}
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">Actif</span>
+                    {% else %}
+                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs">Inactif</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="{{ url_for('admin.service_edit', id=service.id) }}" class="text-blue-600 hover:text-blue-700 mr-3">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form method="POST" action="{{ url_for('admin.service_delete', id=service.id) }}" class="inline" onsubmit="return confirm('Supprimer ce service ?')">
+                        <button type="submit" class="text-red-600 hover:text-red-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="px-6 py-12 text-center text-gray-500">Aucun service</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

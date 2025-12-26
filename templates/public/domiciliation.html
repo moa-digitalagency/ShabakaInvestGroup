@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-gradient py-32 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920" alt="Building" class="w-full h-full object-cover">
+    </div>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="max-w-3xl">
+            <span class="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <i class="fas fa-building mr-2"></i>Domiciliation
+            </span>
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">Domiciliation d'Entreprise à Marrakech</h1>
+            <p class="text-xl text-gray-300 mb-8">Une adresse commerciale prestigieuse pour votre entreprise au cœur de la ville ocre.</p>
+            <a href="{{ url_for('public.contact') }}?service=domiciliation-entreprise" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg">
+                <i class="fas fa-phone mr-2"></i>Demander un Devis
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold text-secondary-900 mb-6">Pourquoi nous choisir ?</h2>
+                <p class="text-lg text-gray-600 mb-8">{{ service.description if service else 'La domiciliation d\'entreprise chez Shabaka Invest Group vous offre une adresse commerciale de prestige.' }}</p>
+                <div class="space-y-4">
+                    {% if service and service.features %}
+                    {% for feature in service.features.split(',') %}
+                    <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-secondary-900">{{ feature.strip() }}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-secondary-900">Adresse commerciale prestigieuse</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-secondary-900">Réception et gestion du courrier</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-primary-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-secondary-900">Accueil téléphonique personnalisé</h3>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700" alt="Bureau moderne" class="rounded-2xl shadow-xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-secondary-900 mb-4">Nos Formules</h2>
+            <p class="text-xl text-gray-600">Choisissez la formule adaptée à vos besoins</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-secondary-900 mb-4">Essentiel</h3>
+                <p class="text-gray-600 mb-6">Pour les entrepreneurs qui débutent</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Adresse commerciale</li>
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Réception du courrier</li>
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Notification email</li>
+                </ul>
+                <a href="{{ url_for('public.contact') }}" class="block w-full bg-gray-100 text-secondary-900 text-center py-3 rounded-lg hover:bg-gray-200 transition font-semibold">En savoir plus</a>
+            </div>
+            <div class="bg-primary-600 rounded-2xl p-8 shadow-lg text-white transform scale-105">
+                <span class="inline-block bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-semibold mb-4">Populaire</span>
+                <h3 class="text-2xl font-bold mb-4">Professionnel</h3>
+                <p class="text-primary-100 mb-6">La solution complète</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Tout de l'offre Essentiel</li>
+                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Accueil téléphonique</li>
+                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Salle de réunion (4h/mois)</li>
+                    <li class="flex items-center"><i class="fas fa-check mr-2"></i>Support administratif</li>
+                </ul>
+                <a href="{{ url_for('public.contact') }}" class="block w-full bg-white text-primary-600 text-center py-3 rounded-lg hover:bg-gray-100 transition font-semibold">Demander un devis</a>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-secondary-900 mb-4">Premium</h3>
+                <p class="text-gray-600 mb-6">Pour les entreprises exigeantes</p>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Tout de l'offre Pro</li>
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Bureau privatif (10h/mois)</li>
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Secrétariat dédié</li>
+                    <li class="flex items-center text-gray-600"><i class="fas fa-check text-primary-600 mr-2"></i>Conseils personnalisés</li>
+                </ul>
+                <a href="{{ url_for('public.contact') }}" class="block w-full bg-gray-100 text-secondary-900 text-center py-3 rounded-lg hover:bg-gray-200 transition font-semibold">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-primary-600">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Prêt à domicilier votre entreprise ?</h2>
+        <p class="text-xl text-primary-100 mb-8">Obtenez votre adresse professionnelle dès aujourd'hui.</p>
+        <a href="{{ url_for('public.contact') }}?service=domiciliation-entreprise" class="inline-flex items-center bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition font-semibold text-lg">
+            Commencer Maintenant
+        </a>
+    </div>
+</section>
+{% endblock %}

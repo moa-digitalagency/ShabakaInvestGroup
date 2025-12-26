@@ -1,0 +1,59 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Message de {{ contact.name }}{% endblock %}
+{% block page_title %}Message de {{ contact.name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                    <span class="text-primary-600 font-bold text-xl">{{ contact.name[0] }}</span>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-secondary-900">{{ contact.name }}</h2>
+                    <p class="text-gray-500">{{ contact.created_at.strftime('%d/%m/%Y à %H:%M') }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <label class="text-sm text-gray-500">Email</label>
+                <p class="text-secondary-900">
+                    <a href="mailto:{{ contact.email }}" class="text-primary-600 hover:text-primary-700">{{ contact.email }}</a>
+                </p>
+            </div>
+            <div>
+                <label class="text-sm text-gray-500">Téléphone</label>
+                <p class="text-secondary-900">{{ contact.phone or '-' }}</p>
+            </div>
+            <div>
+                <label class="text-sm text-gray-500">Entreprise</label>
+                <p class="text-secondary-900">{{ contact.company or '-' }}</p>
+            </div>
+            <div>
+                <label class="text-sm text-gray-500">Service</label>
+                <p class="text-secondary-900">{{ contact.service_interest or '-' }}</p>
+            </div>
+        </div>
+        
+        <div>
+            <label class="text-sm text-gray-500">Message</label>
+            <div class="mt-2 p-4 bg-gray-50 rounded-lg">
+                <p class="text-secondary-900 whitespace-pre-wrap">{{ contact.message }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex justify-between">
+        <a href="{{ url_for('admin.contacts_list') }}" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+            <i class="fas fa-arrow-left mr-2"></i>Retour
+        </a>
+        <a href="mailto:{{ contact.email }}" class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition">
+            <i class="fas fa-reply mr-2"></i>Répondre
+        </a>
+    </div>
+</div>
+{% endblock %}

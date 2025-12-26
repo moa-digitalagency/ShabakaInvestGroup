@@ -1,0 +1,78 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ 'Modifier' if service else 'Nouveau' }} Service{% endblock %}
+{% block page_title %}{{ 'Modifier' if service else 'Nouveau' }} Service{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-lg font-bold text-secondary-900 mb-6">Informations du service</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom du service *</label>
+                    <input type="text" id="name" name="name" required value="{{ service.name if service else '' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label for="icon" class="block text-sm font-medium text-gray-700 mb-2">Icône (FontAwesome)</label>
+                    <input type="text" id="icon" name="icon" value="{{ service.icon if service else '' }}" placeholder="ex: briefcase, building, hard-hat" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                    <p class="text-xs text-gray-500 mt-1">Nom de l'icône FontAwesome (sans le "fa-")</p>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">Description courte</label>
+                <input type="text" id="short_description" name="short_description" value="{{ service.short_description if service else '' }}" maxlength="300" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+            </div>
+            
+            <div class="mt-6">
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description complète</label>
+                <textarea id="description" name="description" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">{{ service.description if service else '' }}</textarea>
+            </div>
+            
+            <div class="mt-6">
+                <label for="features" class="block text-sm font-medium text-gray-700 mb-2">Caractéristiques</label>
+                <input type="text" id="features" name="features" value="{{ service.features if service else '' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                <p class="text-xs text-gray-500 mt-1">Séparez les caractéristiques par des virgules</p>
+            </div>
+            
+            <div class="mt-6">
+                <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Image</label>
+                {% if service and service.image %}
+                <div class="mb-4">
+                    <img src="{{ service.image }}" alt="{{ service.name }}" class="w-32 h-32 object-cover rounded-lg">
+                </div>
+                {% endif %}
+                <input type="file" id="image" name="image" accept="image/*" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+            </div>
+            
+            <div class="mt-6 grid md:grid-cols-3 gap-6">
+                <div>
+                    <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Ordre d'affichage</label>
+                    <input type="number" id="order" name="order" value="{{ service.order if service else 0 }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div class="flex items-center mt-8">
+                    <input type="checkbox" id="is_featured" name="is_featured" {% if service and service.is_featured %}checked{% endif %} class="w-4 h-4 text-primary-600 rounded">
+                    <label for="is_featured" class="ml-2 text-sm text-gray-700">En vedette</label>
+                </div>
+                {% if service %}
+                <div class="flex items-center mt-8">
+                    <input type="checkbox" id="is_active" name="is_active" {% if service.is_active %}checked{% endif %} class="w-4 h-4 text-primary-600 rounded">
+                    <label for="is_active" class="ml-2 text-sm text-gray-700">Actif</label>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="flex justify-between">
+            <a href="{{ url_for('admin.services_list') }}" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                Annuler
+            </a>
+            <button type="submit" class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition">
+                {{ 'Mettre à jour' if service else 'Créer le service' }}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

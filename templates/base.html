@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if seo %}
+    <title>{{ seo.meta_title or 'Shabaka Invest Group - Domiciliation et Conseils d\'Entreprise à Marrakech' }}</title>
+    <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group offre des services de domiciliation d\'entreprise, conseils et nettoyage de chantier à Marrakech.' }}">
+    <meta name="keywords" content="{{ seo.keywords or 'domiciliation, marrakech, entreprise, conseils, nettoyage chantier' }}">
+    <meta property="og:title" content="{{ seo.og_title or seo.meta_title }}">
+    <meta property="og:description" content="{{ seo.og_description or seo.meta_description }}">
+    {% if seo.og_image %}<meta property="og:image" content="{{ seo.og_image }}">{% endif %}
+    {% if seo.canonical_url %}<link rel="canonical" href="{{ seo.canonical_url }}">{% endif %}
+    <meta name="robots" content="{{ seo.robots or 'index, follow' }}">
+    {% else %}
+    <title>{% block title %}Shabaka Invest Group{% endblock %}</title>
+    <meta name="description" content="Shabaka Invest Group - Domiciliation d'entreprise, conseils et nettoyage de chantier à Marrakech">
+    {% endif %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fef7ee',
+                            100: '#fdeed7',
+                            200: '#f9d9ae',
+                            300: '#f5be7a',
+                            400: '#f09a44',
+                            500: '#ec7d1f',
+                            600: '#dd6315',
+                            700: '#b74a13',
+                            800: '#923b18',
+                            900: '#763216',
+                        },
+                        secondary: {
+                            50: '#f6f7f9',
+                            100: '#eceef2',
+                            200: '#d5dae2',
+                            300: '#b0bac8',
+                            400: '#8595a9',
+                            500: '#66788f',
+                            600: '#516076',
+                            700: '#434e60',
+                            800: '#3a4351',
+                            900: '#1e2433',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e2433 0%, #434e60 100%);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ec7d1f;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="font-sans antialiased bg-gray-50">
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="{{ url_for('public.home') }}" class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold text-secondary-900">Shabaka</span>
+                            <span class="text-xl font-bold text-primary-600">Invest</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('public.home') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Accueil</a>
+                    <a href="{{ url_for('public.cleaning') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Nettoyage Chantier</a>
+                    <a href="{{ url_for('public.domiciliation') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Domiciliation</a>
+                    <a href="{{ url_for('public.consulting') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Conseils</a>
+                    <a href="{{ url_for('public.services') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Services</a>
+                    <a href="{{ url_for('public.about') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">À Propos</a>
+                    <a href="{{ url_for('public.contact') }}" class="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-secondary-700 hover:text-primary-600">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="{{ url_for('public.home') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Accueil</a>
+                <a href="{{ url_for('public.cleaning') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Nettoyage Chantier</a>
+                <a href="{{ url_for('public.domiciliation') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Domiciliation</a>
+                <a href="{{ url_for('public.consulting') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Conseils</a>
+                <a href="{{ url_for('public.services') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Services</a>
+                <a href="{{ url_for('public.about') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">À Propos</a>
+                <a href="{{ url_for('public.contact') }}" class="block bg-primary-600 text-white px-6 py-2.5 rounded-lg text-center hover:bg-primary-700 transition font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="fixed top-24 right-4 z-50 space-y-2">
+        {% for category, message in messages %}
+        <div class="flash-message bg-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-100 border border-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-400 text-{{ 'green' if category == 'success' else 'red' if category == 'danger' else 'yellow' if category == 'warning' else 'blue' }}-700 px-4 py-3 rounded-lg shadow-lg max-w-md">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <main class="pt-20">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-secondary-900 text-white mt-20">
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">S</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold">Shabaka</span>
+                            <span class="text-xl font-bold text-primary-500">Invest</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        {{ site_settings.footer_text if site_settings else 'Votre partenaire de confiance pour la domiciliation et le développement de votre entreprise à Marrakech.' }}
+                    </p>
+                    <div class="flex space-x-4">
+                        {% if site_settings and site_settings.facebook %}
+                        <a href="{{ site_settings.facebook }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.linkedin %}
+                        <a href="{{ site_settings.linkedin }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.instagram %}
+                        <a href="{{ site_settings.instagram }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if site_settings and site_settings.whatsapp %}
+                        <a href="https://wa.me/{{ site_settings.whatsapp }}" class="w-10 h-10 bg-secondary-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition"><i class="fab fa-whatsapp"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{{ url_for('public.cleaning') }}" class="text-gray-400 hover:text-primary-500 transition">Nettoyage de Chantier</a></li>
+                        <li><a href="{{ url_for('public.domiciliation') }}" class="text-gray-400 hover:text-primary-500 transition">Domiciliation</a></li>
+                        <li><a href="{{ url_for('public.consulting') }}" class="text-gray-400 hover:text-primary-500 transition">Conseils</a></li>
+                        <li><a href="{{ url_for('public.services') }}" class="text-gray-400 hover:text-primary-500 transition">Tous les Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        {% if site_settings %}
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary-500"></i>
+                            <span>{{ site_settings.address }}</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-primary-500"></i>
+                            <span>{{ site_settings.phone }}</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-primary-500"></i>
+                            <span>{{ site_settings.email }}</span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-secondary-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; {{ 'now' | default('2024') }} Shabaka Invest Group. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="{{ url_for('public.legal') }}" class="text-gray-400 hover:text-primary-500 text-sm transition">Mentions Légales</a>
+                    <a href="{{ url_for('admin.login') }}" class="text-gray-400 hover:text-primary-500 text-sm transition">Admin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        setTimeout(function() {
+            document.querySelectorAll('.flash-message').forEach(function(el) {
+                el.style.opacity = '0';
+                setTimeout(function() { el.remove(); }, 300);
+            });
+        }, 5000);
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.pythonlibs/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files
+.env.local
+
+# Uploads
+static/uploads/
+
+# Database
+*.db
+*.sqlite3
+
+# Node
+node_modules/
+
+# UV
+.uv/

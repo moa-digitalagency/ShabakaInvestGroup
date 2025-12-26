@@ -1,0 +1,111 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Tableau de bord{% endblock %}
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block content %}
+<div class="grid md:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Services</p>
+                <p class="text-3xl font-bold text-secondary-900">{{ stats.services }}</p>
+            </div>
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-briefcase text-blue-600"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Témoignages</p>
+                <p class="text-3xl font-bold text-secondary-900">{{ stats.testimonials }}</p>
+            </div>
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-comment-dots text-green-600"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Messages</p>
+                <p class="text-3xl font-bold text-secondary-900">{{ stats.contacts }}</p>
+            </div>
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-envelope text-purple-600"></i>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Non lus</p>
+                <p class="text-3xl font-bold text-primary-600">{{ stats.unread_contacts }}</p>
+            </div>
+            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-bell text-orange-600"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-xl shadow-sm">
+        <div class="p-6 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-secondary-900">Messages récents</h2>
+        </div>
+        <div class="p-6">
+            {% if recent_contacts %}
+            <ul class="space-y-4">
+                {% for contact in recent_contacts %}
+                <li class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                            <span class="text-primary-600 font-bold">{{ contact.name[0] }}</span>
+                        </div>
+                        <div>
+                            <p class="font-medium text-secondary-900">{{ contact.name }}</p>
+                            <p class="text-sm text-gray-500">{{ contact.email }}</p>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('admin.contact_view', id=contact.id) }}" class="text-primary-600 hover:text-primary-700">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-gray-500 text-center py-8">Aucun message récent</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-sm">
+        <div class="p-6 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-secondary-900">Actions rapides</h2>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-2 gap-4">
+                <a href="{{ url_for('admin.service_create') }}" class="flex items-center space-x-3 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
+                    <i class="fas fa-plus-circle text-blue-600"></i>
+                    <span class="text-blue-700 font-medium">Nouveau Service</span>
+                </a>
+                <a href="{{ url_for('admin.testimonial_create') }}" class="flex items-center space-x-3 p-4 bg-green-50 rounded-lg hover:bg-green-100 transition">
+                    <i class="fas fa-plus-circle text-green-600"></i>
+                    <span class="text-green-700 font-medium">Nouveau Témoignage</span>
+                </a>
+                <a href="{{ url_for('admin.seo_list') }}" class="flex items-center space-x-3 p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
+                    <i class="fas fa-search text-purple-600"></i>
+                    <span class="text-purple-700 font-medium">Gérer SEO</span>
+                </a>
+                <a href="{{ url_for('admin.settings') }}" class="flex items-center space-x-3 p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                    <i class="fas fa-cog text-orange-600"></i>
+                    <span class="text-orange-700 font-medium">Paramètres</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

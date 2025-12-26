@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-gradient py-24">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="max-w-3xl">
+            {% if service.is_featured %}
+            <span class="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">Service Phare</span>
+            {% endif %}
+            <h1 class="text-5xl font-bold text-white mb-6">{{ service.name }}</h1>
+            <p class="text-xl text-gray-300">{{ service.short_description }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="md:col-span-2">
+                {% if service.image %}
+                <img src="{{ service.image }}" alt="{{ service.name }}" class="w-full h-64 object-cover rounded-2xl mb-8">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" alt="{{ service.name }}" class="w-full h-64 object-cover rounded-2xl mb-8">
+                {% endif %}
+                
+                <div class="prose prose-lg max-w-none">
+                    {{ service.description | safe if service.description else '' }}
+                </div>
+                
+                {% if service.features %}
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-secondary-900 mb-6">Ce que nous offrons</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        {% for feature in service.features.split(',') %}
+                        <div class="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+                            <i class="fas fa-check-circle text-primary-600"></i>
+                            <span class="text-gray-700">{{ feature.strip() }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="md:col-span-1">
+                <div class="bg-gray-50 rounded-2xl p-8 sticky top-24">
+                    <h3 class="text-xl font-bold text-secondary-900 mb-6">Intéressé par ce service ?</h3>
+                    <p class="text-gray-600 mb-6">Contactez-nous pour obtenir un devis personnalisé et gratuit.</p>
+                    <a href="{{ url_for('public.contact') }}?service={{ service.slug }}" class="block w-full bg-primary-600 text-white text-center px-6 py-4 rounded-lg hover:bg-primary-700 transition font-semibold mb-4">
+                        Demander un Devis
+                    </a>
+                    <a href="{{ url_for('public.services') }}" class="block w-full border border-gray-300 text-gray-700 text-center px-6 py-4 rounded-lg hover:bg-gray-100 transition font-semibold">
+                        Voir tous les Services
+                    </a>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <h4 class="font-semibold text-secondary-900 mb-4">Contact Direct</h4>
+                        {% if site_settings %}
+                        <div class="space-y-3">
+                            <a href="tel:{{ site_settings.phone }}" class="flex items-center text-gray-600 hover:text-primary-600">
+                                <i class="fas fa-phone mr-3"></i>{{ site_settings.phone }}
+                            </a>
+                            <a href="mailto:{{ site_settings.email }}" class="flex items-center text-gray-600 hover:text-primary-600">
+                                <i class="fas fa-envelope mr-3"></i>{{ site_settings.email }}
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

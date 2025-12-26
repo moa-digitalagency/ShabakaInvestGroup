@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Témoignages{% endblock %}
+{% block page_title %}Gestion des Témoignages{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <p class="text-gray-600">Gérez les avis de vos clients</p>
+    <a href="{{ url_for('admin.testimonial_create') }}" class="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition">
+        <i class="fas fa-plus mr-2"></i>Nouveau Témoignage
+    </a>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for testimonial in testimonials %}
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+                {% for i in range(testimonial.rating) %}
+                <i class="fas fa-star text-yellow-400"></i>
+                {% endfor %}
+            </div>
+            {% if testimonial.is_featured %}
+            <span class="bg-primary-100 text-primary-700 px-2 py-1 rounded-full text-xs">Vedette</span>
+            {% endif %}
+        </div>
+        <p class="text-gray-600 text-sm mb-4 line-clamp-3">"{{ testimonial.content }}"</p>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                    <span class="text-primary-600 font-bold">{{ testimonial.author_name[0] }}</span>
+                </div>
+                <div>
+                    <p class="font-medium text-secondary-900 text-sm">{{ testimonial.author_name }}</p>
+                    <p class="text-gray-500 text-xs">{{ testimonial.author_company }}</p>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <a href="{{ url_for('admin.testimonial_edit', id=testimonial.id) }}" class="text-blue-600 hover:text-blue-700">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form method="POST" action="{{ url_for('admin.testimonial_delete', id=testimonial.id) }}" class="inline" onsubmit="return confirm('Supprimer ce témoignage ?')">
+                    <button type="submit" class="text-red-600 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-span-full text-center py-12 text-gray-500">
+        Aucun témoignage
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

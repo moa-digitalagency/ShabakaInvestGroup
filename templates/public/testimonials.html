@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-gradient py-24">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold text-white mb-6">Témoignages Clients</h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Découvrez ce que nos clients disent de nous.</p>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for testimonial in testimonials %}
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div class="flex items-center mb-4">
+                    {% for i in range(testimonial.rating) %}
+                    <i class="fas fa-star text-yellow-400"></i>
+                    {% endfor %}
+                    {% for i in range(5 - testimonial.rating) %}
+                    <i class="fas fa-star text-gray-300"></i>
+                    {% endfor %}
+                </div>
+                <p class="text-gray-600 mb-6 italic">"{{ testimonial.content }}"</p>
+                <div class="flex items-center">
+                    {% if testimonial.author_image %}
+                    <img src="{{ testimonial.author_image }}" alt="{{ testimonial.author_name }}" class="w-12 h-12 rounded-full mr-4 object-cover">
+                    {% else %}
+                    <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-primary-600 font-bold">{{ testimonial.author_name[0] }}</span>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="font-semibold text-secondary-900">{{ testimonial.author_name }}</p>
+                        <p class="text-gray-500 text-sm">
+                            {% if testimonial.author_position %}{{ testimonial.author_position }} - {% endif %}
+                            {{ testimonial.author_company }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-600">Aucun témoignage pour le moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-primary-600">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Partagez votre expérience</h2>
+        <p class="text-xl text-primary-100 mb-8">Vous avez travaillé avec nous ? Votre avis compte !</p>
+        <a href="{{ url_for('public.contact') }}" class="inline-flex items-center bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition font-semibold text-lg">
+            Nous Contacter
+        </a>
+    </div>
+</section>
+{% endblock %}
