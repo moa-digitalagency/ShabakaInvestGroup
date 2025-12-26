@@ -12,14 +12,14 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation et co
 ## Project Structure
 ```
 ├── main.py                 # Point d'entrée Flask
-├── src/
-│   ├── modeles/           # Modèles SQLAlchemy
-│   ├── routes/            # Blueprints (public, admin)
-│   ├── services/          # Logique métier
-│   ├── security/          # Authentification
-│   ├── utils/             # Utilitaires
-│   ├── templates/         # Templates HTML
-│   └── static/            # Fichiers statiques
+├── templates/             # Templates HTML (public, admin)
+├── static/                # Fichiers statiques (uploads, etc)
+└── src/
+    ├── modeles/           # Modèles SQLAlchemy
+    ├── routes/            # Blueprints (public, admin)
+    ├── services/          # Logique métier
+    ├── security/          # Authentification
+    └── utils/             # Utilitaires
 ```
 
 ## Features
@@ -48,7 +48,7 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation et co
 - Gestion de Projet
 
 ## Recent Changes
-- Suppression du service "Nettoyage de Chantier" 
+- Suppression du service "Nettoyage de Chantier" de la base de données
 - Changement des couleurs de orange vers bleu nuit
-- Réorganisation: templates et static déplacés dans src/
-- Mise à jour des routes et templates associées
+- Déplacement de templates/ et static/ à la racine
+- src/ contient uniquement la logique applicative
