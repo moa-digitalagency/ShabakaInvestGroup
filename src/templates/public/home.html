@@ -12,14 +12,14 @@
                     <i class="fas fa-star mr-2"></i>Service N°1 au Maroc
                 </span>
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                    Experts en <span class="text-primary-500">Nettoyage de Chantier</span> à Marrakech
+                    Solutions Complètes pour votre <span class="text-primary-500">Entreprise</span> à Marrakech
                 </h1>
                 <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                    Shabaka Invest Group transforme vos chantiers en espaces impeccables. Domiciliation d'entreprise, conseils experts et gestion de projet complète.
+                    Shabaka Invest Group offre des services de domiciliation d'entreprise, conseils experts et gestion de projet complète.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="{{ url_for('public.cleaning') }}" class="bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg flex items-center">
-                        <i class="fas fa-hard-hat mr-2"></i>Nettoyage Chantier
+                    <a href="{{ url_for('public.services') }}" class="bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg flex items-center">
+                        <i class="fas fa-briefcase mr-2"></i>Nos Services
                     </a>
                     <a href="{{ url_for('public.contact') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-secondary-900 transition font-semibold text-lg">
                         Demander un Devis
@@ -46,36 +46,6 @@
     </div>
 </section>
 
-{% if cleaning_service %}
-<section class="py-20 bg-gradient-to-br from-primary-50 to-primary-100">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700" alt="Nettoyage de chantier" class="rounded-2xl shadow-xl">
-            </div>
-            <div>
-                <span class="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                    <i class="fas fa-star mr-2"></i>Notre Spécialité
-                </span>
-                <h2 class="text-4xl font-bold text-secondary-900 mb-6">{{ cleaning_service.name }}</h2>
-                <p class="text-lg text-gray-600 mb-6">{{ cleaning_service.short_description }}</p>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    {% for feature in cleaning_service.features.split(',') %}
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-check-circle text-primary-600"></i>
-                        <span class="text-gray-700">{{ feature.strip() }}</span>
-                    </div>
-                    {% endfor %}
-                </div>
-                <a href="{{ url_for('public.cleaning') }}" class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition font-semibold">
-                    <span>Découvrir le Service</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
 
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4">
@@ -86,10 +56,7 @@
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for service in featured_services %}
-            <div class="service-card bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition duration-300 hover:shadow-xl {% if service.slug == 'nettoyage-chantier' %}ring-2 ring-primary-500{% endif %}">
-                {% if service.slug == 'nettoyage-chantier' %}
-                <span class="inline-block bg-primary-600 text-white text-xs px-3 py-1 rounded-full mb-4">Populaire</span>
-                {% endif %}
+            <div class="service-card bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition duration-300 hover:shadow-xl">
                 <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
                     <i class="fas fa-{{ service.icon or 'briefcase' }} text-2xl text-primary-600"></i>
                 </div>

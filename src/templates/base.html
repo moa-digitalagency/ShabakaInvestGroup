@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if seo %}
     <title>{{ seo.meta_title or 'Shabaka Invest Group - Domiciliation et Conseils d\'Entreprise à Marrakech' }}</title>
-    <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group offre des services de domiciliation d\'entreprise, conseils et nettoyage de chantier à Marrakech.' }}">
-    <meta name="keywords" content="{{ seo.keywords or 'domiciliation, marrakech, entreprise, conseils, nettoyage chantier' }}">
+    <meta name="description" content="{{ seo.meta_description or 'Shabaka Invest Group offre des services de domiciliation d\'entreprise et conseils aux entreprises à Marrakech.' }}">
+    <meta name="keywords" content="{{ seo.keywords or 'domiciliation, marrakech, entreprise, conseils' }}">
     <meta property="og:title" content="{{ seo.og_title or seo.meta_title }}">
     <meta property="og:description" content="{{ seo.og_description or seo.meta_description }}">
     {% if seo.og_image %}<meta property="og:image" content="{{ seo.og_image }}">{% endif %}
@@ -14,7 +14,7 @@
     <meta name="robots" content="{{ seo.robots or 'index, follow' }}">
     {% else %}
     <title>{% block title %}Shabaka Invest Group{% endblock %}</title>
-    <meta name="description" content="Shabaka Invest Group - Domiciliation d'entreprise, conseils et nettoyage de chantier à Marrakech">
+    <meta name="description" content="Shabaka Invest Group - Domiciliation d'entreprise et conseils aux entreprises à Marrakech">
     {% endif %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -25,16 +25,16 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#fef7ee',
-                            100: '#fdeed7',
-                            200: '#f9d9ae',
-                            300: '#f5be7a',
-                            400: '#f09a44',
-                            500: '#ec7d1f',
-                            600: '#dd6315',
-                            700: '#b74a13',
-                            800: '#923b18',
-                            900: '#763216',
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d7ff',
+                            300: '#a4b8ff',
+                            400: '#7b92ff',
+                            500: '#5a6cff',
+                            600: '#3d4fd9',
+                            700: '#2d3bb8',
+                            800: '#1e2796',
+                            900: '#0d1a5e',
                         },
                         secondary: {
                             50: '#f6f7f9',
@@ -58,7 +58,7 @@
     </script>
     <style>
         .hero-gradient {
-            background: linear-gradient(135deg, #1e2433 0%, #434e60 100%);
+            background: linear-gradient(135deg, #0d1a5e 0%, #1e2796 100%);
         }
         .service-card:hover {
             transform: translateY(-5px);
@@ -73,7 +73,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #ec7d1f;
+            background: #5a6cff;
             transition: width 0.3s;
         }
         .nav-link:hover::after {
@@ -99,7 +99,6 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ url_for('public.home') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Accueil</a>
-                    <a href="{{ url_for('public.cleaning') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Nettoyage Chantier</a>
                     <a href="{{ url_for('public.domiciliation') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Domiciliation</a>
                     <a href="{{ url_for('public.consulting') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Conseils</a>
                     <a href="{{ url_for('public.services') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Services</a>
@@ -116,7 +115,6 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-4 space-y-3">
                 <a href="{{ url_for('public.home') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Accueil</a>
-                <a href="{{ url_for('public.cleaning') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Nettoyage Chantier</a>
                 <a href="{{ url_for('public.domiciliation') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Domiciliation</a>
                 <a href="{{ url_for('public.consulting') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Conseils</a>
                 <a href="{{ url_for('public.services') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Services</a>
@@ -176,7 +174,6 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Services</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ url_for('public.cleaning') }}" class="text-gray-400 hover:text-primary-500 transition">Nettoyage de Chantier</a></li>
                         <li><a href="{{ url_for('public.domiciliation') }}" class="text-gray-400 hover:text-primary-500 transition">Domiciliation</a></li>
                         <li><a href="{{ url_for('public.consulting') }}" class="text-gray-400 hover:text-primary-500 transition">Conseils</a></li>
                         <li><a href="{{ url_for('public.services') }}" class="text-gray-400 hover:text-primary-500 transition">Tous les Services</a></li>

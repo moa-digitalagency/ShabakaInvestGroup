@@ -93,20 +93,6 @@ def seed_initial_data():
     if Service.query.first() is None:
         services_data = [
             {
-                'name': 'Nettoyage de Chantier',
-                'slug': 'nettoyage-chantier',
-                'short_description': 'Service professionnel de nettoyage après travaux pour remettre vos locaux en parfait état.',
-                'description': '''Notre service de nettoyage de chantier est notre spécialité. Nous intervenons après tous types de travaux pour nettoyer et remettre en état vos locaux professionnels et résidentiels.
-
-Nous proposons un nettoyage complet incluant : élimination des débris, dépoussiérage intégral, nettoyage des sols, vitres et surfaces, désinfection, et remise en état finale.
-
-Notre équipe expérimentée utilise des équipements professionnels pour garantir un résultat impeccable, vous permettant d'occuper vos locaux immédiatement après notre intervention.''',
-                'icon': 'hard-hat',
-                'features': 'Nettoyage post-travaux,Élimination des débris,Dépoussiérage complet,Nettoyage vitres et sols,Désinfection,Remise en état finale',
-                'is_featured': True,
-                'order': 1
-            },
-            {
                 'name': 'Domiciliation d\'Entreprise',
                 'slug': 'domiciliation-entreprise',
                 'short_description': 'Obtenez une adresse commerciale prestigieuse à Marrakech pour votre entreprise.',
@@ -118,7 +104,7 @@ Idéal pour les entrepreneurs, freelances et sociétés souhaitant établir leur
                 'icon': 'building',
                 'features': 'Adresse commerciale prestigieuse,Réception du courrier,Accueil téléphonique,Salles de réunion,Support administratif,Flexibilité totale',
                 'is_featured': True,
-                'order': 2
+                'order': 1
             },
             {
                 'name': 'Conseils aux Entreprises',
@@ -132,7 +118,7 @@ Avec notre connaissance approfondie du marché marocain, nous vous aidons à pre
                 'icon': 'lightbulb',
                 'features': 'Création d\'entreprise,Stratégie commerciale,Optimisation fiscale,Gestion financière,Conseil RH,Développement commercial',
                 'is_featured': True,
-                'order': 3
+                'order': 2
             },
             {
                 'name': 'Gestion de Projet',
@@ -140,13 +126,13 @@ Avec notre connaissance approfondie du marché marocain, nous vous aidons à pre
                 'short_description': 'Pilotage complet de vos projets de construction et rénovation.',
                 'description': '''Notre service de gestion de projet assure le suivi complet de vos projets immobiliers et de construction.
 
-Nous gérons : la planification, la coordination des intervenants, le suivi des délais et budgets, le contrôle qualité, et bien sûr le nettoyage final de chantier.
+Nous gérons : la planification, la coordination des intervenants, le suivi des délais et budgets, le contrôle qualité.
 
 De la conception à la livraison, nous sommes votre interlocuteur unique pour des projets réussis.''',
                 'icon': 'clipboard-list',
-                'features': 'Planification complète,Coordination des équipes,Suivi budgétaire,Contrôle qualité,Nettoyage final inclus,Livraison clé en main',
+                'features': 'Planification complète,Coordination des équipes,Suivi budgétaire,Contrôle qualité,Livraison clé en main',
                 'is_featured': True,
-                'order': 4
+                'order': 3
             }
         ]
         for data in services_data:
@@ -160,14 +146,6 @@ De la conception à la livraison, nous sommes votre interlocuteur unique pour de
                 'author_company': 'Tech Solutions Maroc',
                 'author_position': 'Directeur Général',
                 'content': 'Excellent service de domiciliation ! L\'équipe de Shabaka Invest Group est très professionnelle et réactive. Je recommande vivement.',
-                'rating': 5,
-                'is_featured': True
-            },
-            {
-                'author_name': 'Sophie Martin',
-                'author_company': 'Agence Immobilière Atlas',
-                'author_position': 'Gérante',
-                'content': 'Le nettoyage de chantier effectué par Shabaka était impeccable. Nos locaux étaient prêts à être utilisés le jour même. Service exceptionnel !',
                 'rating': 5,
                 'is_featured': True
             },

@@ -14,12 +14,10 @@ def inject_settings():
 def home():
     featured_services = ContentService.get_featured_services()
     testimonials = TestimonialService.get_featured_testimonials()
-    cleaning_service = ContentService.get_service_by_slug('nettoyage-chantier')
     seo = SEOService.get_seo_for_page('home')
     return render_template('public/home.html', 
                          featured_services=featured_services,
                          testimonials=testimonials,
-                         cleaning_service=cleaning_service,
                          seo=seo)
 
 @public_bp.route('/services')
@@ -35,13 +33,6 @@ def service_detail(slug):
         flash('Service non trouvé.', 'warning')
         return redirect(url_for('public.services'))
     return render_template('public/service_detail.html', service=service)
-
-@public_bp.route('/nettoyage-chantier')
-def cleaning():
-    service = ContentService.get_service_by_slug('nettoyage-chantier')
-    testimonials = TestimonialService.get_featured_testimonials()
-    seo = SEOService.get_seo_for_page('cleaning')
-    return render_template('public/cleaning.html', service=service, testimonials=testimonials, seo=seo)
 
 @public_bp.route('/domiciliation')
 def domiciliation():
