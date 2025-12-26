@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 from src.modeles import db, User
 from src.security import login_manager
 from src.routes.public import public_bp
@@ -9,6 +10,8 @@ from src.services import seed_initial_data
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "shabaka-invest-secret-key-2024"
+
+csrf = CSRFProtect(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_recycle": 300,

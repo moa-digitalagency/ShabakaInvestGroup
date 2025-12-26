@@ -62,9 +62,15 @@ def services_list():
 @admin_required
 def service_create():
     if request.method == 'POST':
+        new_slug = slugify(request.form.get('name'))
+        existing = Service.query.filter_by(slug=new_slug).first()
+        if existing:
+            flash('Un service avec ce nom existe déjà.', 'danger')
+            return render_template('admin/service_form.html', service=None)
+        
         service = Service(
             name=request.form.get('name'),
-            slug=slugify(request.form.get('name')),
+            slug=new_slug,
             short_description=request.form.get('short_description'),
             description=request.form.get('description'),
             icon=request.form.get('icon'),
@@ -94,8 +100,14 @@ def service_edit(id):
     service = Service.query.get_or_404(id)
     
     if request.method == 'POST':
+        new_slug = slugify(request.form.get('name'))
+        existing = Service.query.filter(Service.slug == new_slug, Service.id != id).first()
+        if existing:
+            flash('Un service avec ce nom existe déjà.', 'danger')
+            return render_template('admin/service_form.html', service=service)
+        
         service.name = request.form.get('name')
-        service.slug = slugify(request.form.get('name'))
+        service.slug = new_slug
         service.short_description = request.form.get('short_description')
         service.description = request.form.get('description')
         service.icon = request.form.get('icon')
