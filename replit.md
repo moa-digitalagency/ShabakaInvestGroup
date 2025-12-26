@@ -29,7 +29,6 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 - **Couleur primaire**: Bleu nuit (#0d1a5e à #5a6cff)
 - **Design**: Responsive avec Tailwind CSS
 - **Police**: Poppins
-- **Hero**: Image de fond, overlay dégradé, hauteur adaptative (min-h-screen)
 
 ## Services
 1. Domiciliation d'Entreprise
@@ -38,10 +37,10 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 4. Communication & Image Professionnelle
 
 ## Sections Page d'Accueil
-1. **Hero** - Image de fond avec overlay dégradé variable, hauteur plein écran
+1. **Hero** - Image fond, overlays multi-couches, animations
 2. **À Propos** - Présentation avec checklist
 3. **Solutions complètes** - 2 colonnes de services
-4. **Notre Processus** - 4 étapes (Consultation, Analyse, Exécution, Suivi)
+4. **Notre Processus** - 4 étapes
 5. **Pourquoi nous choisir** - Support, Rapidité, Sécurité
 6. **Nos Projets** - 6 projets avec URLs
 7. **Témoignages** - Avis clients
@@ -49,12 +48,25 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 9. **Contact** - Formulaire
 
 ## Recent Changes (26 Dec 2025)
-- Hero entièrement redesigné avec style moderne
-- Overlay dégradé multi-couches (opacités variables)
-- Hauteur adaptative à l'écran (min-h-screen)
-- Gradient text sur "entreprise"
-- Animations fade-in et hover effects
-- Stats card avec backdrop blur sur mobile
-- Effets visuels: radial gradients, pulse animations
-- Section Blog supprimée
-- Contenu simplifié et focalisé
+
+### Hero Section Ultra-Stylisé
+- **Hauteur adaptative**: `min-h-screen` - 100% hauteur de l'écran
+- **Overlays multi-couches** avec opacités variables:
+  - Couche 1: Dégradé principal `from-primary-950/95 via-primary-900/85 to-primary-800/70`
+  - Couche 2: Dégradé diagonal avec opacité 0.7
+  - Couche 3: Effets radiaux complexes (opacité 30%)
+  - Couche 4: Grain et texture SVG
+  - Couche 5: Ligne accent top dégradée
+- **Animations sophistiquées**:
+  - Fade-in-up staggered (0.1s à 0.5s)
+  - Shimmer sur "entreprise"
+  - Pulse animations sur les glow backgrounds
+  - Bounce sur scroll indicator
+- **Effets visuels modernes**:
+  - Texte avec dégradé et shadow
+  - Buttons avec backdrop blur et scale hover
+  - Stats card avec hover effects
+  - Glow animé derrière stats
+  - Effets 3D et ombres
+- **Layout responsive**: 2 colonnes desktop, 1 colonne mobile
+- **Parallax background** avec fixed attachment
