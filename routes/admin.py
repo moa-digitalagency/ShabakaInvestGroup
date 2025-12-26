@@ -445,6 +445,7 @@ def project_create():
             flash('Un projet avec ce titre existe déjà.', 'danger')
             return render_template('admin/project_form.html', project=None)
         
+        order_val = request.form.get('order', '0')
         project = Project(
             title=request.form.get('title'),
             slug=new_slug,
@@ -453,7 +454,7 @@ def project_create():
             category=request.form.get('category'),
             client_name=request.form.get('client_name'),
             is_featured=request.form.get('is_featured') == 'on',
-            order=int(request.form.get('order', 0))
+            order=int(order_val) if order_val.strip() else 0
         )
         
         if 'image' in request.files:
@@ -491,7 +492,8 @@ def project_edit(id):
         project.client_name = request.form.get('client_name')
         project.is_featured = request.form.get('is_featured') == 'on'
         project.is_active = request.form.get('is_active') == 'on'
-        project.order = int(request.form.get('order', 0))
+        order_val = request.form.get('order', '0')
+        project.order = int(order_val) if order_val.strip() else 0
         
         if 'image' in request.files:
             file = request.files['image']
