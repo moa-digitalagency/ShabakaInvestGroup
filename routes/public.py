@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from modeles import db, Service, Testimonial, ContactSubmission, SiteSettings
-from services import ContentService, TestimonialService, ContactService, SettingsService, SEOService
+from services import ContentService, TestimonialService, ContactService, SettingsService, SEOService, HeroService
 
 public_bp = Blueprint('public', __name__)
 
@@ -15,10 +15,12 @@ def home():
     featured_services = ContentService.get_featured_services()
     testimonials = TestimonialService.get_featured_testimonials()
     seo = SEOService.get_seo_for_page('home')
+    hero = HeroService.get_hero_settings()
     return render_template('public/home.html', 
                          featured_services=featured_services,
                          testimonials=testimonials,
-                         seo=seo)
+                         seo=seo,
+                         hero=hero)
 
 @public_bp.route('/services')
 def services():

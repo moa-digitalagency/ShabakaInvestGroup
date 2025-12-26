@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
-from modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset
+from modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset, HeroSettings
 from security import verify_password, hash_password, admin_required
-from services import ContactService, SettingsService
+from services import ContactService, SettingsService, HeroService
 from utils import save_uploaded_file, slugify
 from datetime import datetime
 import os
@@ -377,3 +377,48 @@ def profile():
         return redirect(url_for('admin.profile'))
     
     return render_template('admin/profile.html')
+
+@admin_bp.route('/hero', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def hero_edit():
+    hero = HeroService.get_hero_settings()
+    site_settings = SettingsService.get_settings()
+    
+    if request.method == 'POST':
+        hero.badge_text = request.form.get('badge_text')
+        hero.title_main = request.form.get('title_main')
+        hero.title_highlight = request.form.get('title_highlight')
+        hero.subtitle = request.form.get('subtitle')
+        hero.btn1_text = request.form.get('btn1_text')
+        hero.btn1_icon = request.form.get('btn1_icon')
+        hero.btn1_link = request.form.get('btn1_link')
+        hero.btn2_text = request.form.get('btn2_text')
+        hero.btn2_icon = request.form.get('btn2_icon')
+        hero.btn2_is_whatsapp = request.form.get('btn2_is_whatsapp') == 'on'
+        hero.metric1_value = request.form.get('metric1_value')
+        hero.metric1_label = request.form.get('metric1_label')
+        hero.metric1_icon = request.form.get('metric1_icon')
+        hero.metric2_value = request.form.get('metric2_value')
+        hero.metric2_label = request.form.get('metric2_label')
+        hero.metric2_icon = request.form.get('metric2_icon')
+        hero.metric3_value = request.form.get('metric3_value')
+        hero.metric3_label = request.form.get('metric3_label')
+        hero.metric3_icon = request.form.get('metric3_icon')
+        
+        if 'background_image' in request.files:
+            file = request.files['background_image']
+            if file.filename:
+                filepath = save_uploaded_file(file, 'hero')
+                if filepath:
+                    hero.background_image = '/' + filepath
+        
+        background_url = request.form.get('background_image_url')
+        if background_url and background_url.strip():
+            hero.background_image = background_url.strip()
+        
+        db.session.commit()
+        flash('Hero mis à jour avec succès !', 'success')
+        return redirect(url_for('admin.hero_edit'))
+    
+    return render_template('admin/hero_form.html', hero=hero, site_settings=site_settings)

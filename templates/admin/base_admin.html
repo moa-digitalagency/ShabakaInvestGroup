@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin{% endblock %} - Shabaka Invest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            200: '#c7d7ff',
+                            300: '#a4b8ff',
+                            400: '#7b92ff',
+                            500: '#5a6cff',
+                            600: '#3d4fd9',
+                            700: '#2d3bb8',
+                            800: '#1e2796',
+                            900: '#0d1a5e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="min-h-screen flex">
+        <aside class="w-64 bg-primary-900 text-white fixed h-full">
+            <div class="p-6 border-b border-primary-800">
+                <a href="{{ url_for('admin.dashboard') }}" class="text-xl font-bold">Shabaka Admin</a>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ url_for('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if request.endpoint == 'admin.dashboard' %}bg-primary-800{% endif %}">
+                            <i class="fas fa-tachometer-alt w-5"></i>
+                            <span>Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.hero_edit') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if request.endpoint == 'admin.hero_edit' %}bg-primary-800{% endif %}">
+                            <i class="fas fa-image w-5"></i>
+                            <span>Hero Section</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.services_list') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if 'service' in request.endpoint %}bg-primary-800{% endif %}">
+                            <i class="fas fa-briefcase w-5"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.testimonials_list') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if 'testimonial' in request.endpoint %}bg-primary-800{% endif %}">
+                            <i class="fas fa-quote-right w-5"></i>
+                            <span>Temoignages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.contacts_list') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if 'contact' in request.endpoint %}bg-primary-800{% endif %}">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.media_list') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if 'media' in request.endpoint %}bg-primary-800{% endif %}">
+                            <i class="fas fa-photo-video w-5"></i>
+                            <span>Medias</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.settings') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if request.endpoint == 'admin.settings' %}bg-primary-800{% endif %}">
+                            <i class="fas fa-cog w-5"></i>
+                            <span>Parametres</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.seo_list') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary-800 transition {% if 'seo' in request.endpoint %}bg-primary-800{% endif %}">
+                            <i class="fas fa-search w-5"></i>
+                            <span>SEO</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-primary-800">
+                <a href="{{ url_for('public.home') }}" target="_blank" class="flex items-center gap-3 px-4 py-2 text-sm text-primary-200 hover:text-white transition">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>Voir le site</span>
+                </a>
+                <a href="{{ url_for('admin.logout') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-primary-200 hover:text-white transition">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Deconnexion</span>
+                </a>
+            </div>
+        </aside>
+        
+        <main class="flex-1 ml-64">
+            <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-800">{% block page_title %}Admin{% endblock %}</h1>
+                <div class="flex items-center gap-4">
+                    <span class="text-gray-600">{{ current_user.name }}</span>
+                    <a href="{{ url_for('admin.profile') }}" class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 hover:bg-primary-200 transition">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+            </header>
+            
+            <div class="p-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="mb-4 p-4 rounded-lg {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'danger' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

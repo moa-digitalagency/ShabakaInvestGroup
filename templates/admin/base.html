@@ -55,6 +55,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ url_for('admin.hero_edit') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if request.endpoint == 'admin.hero_edit' %}bg-secondary-800{% endif %}">
+                            <i class="fas fa-star w-5"></i>
+                            <span>Hero Section</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ url_for('admin.services_list') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-secondary-800 transition {% if 'service' in request.endpoint %}bg-secondary-800{% endif %}">
                             <i class="fas fa-briefcase w-5"></i>
                             <span>Services</span>

@@ -1,4 +1,4 @@
-from modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User
+from modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User, HeroSettings
 from security import hash_password
 from datetime import datetime
 
@@ -69,6 +69,16 @@ class SEOService:
     def get_seo_for_page(page_type):
         return SEOSettings.query.filter_by(page_type=page_type).first()
 
+class HeroService:
+    @staticmethod
+    def get_hero_settings():
+        hero = HeroSettings.query.first()
+        if not hero:
+            hero = HeroSettings()
+            db.session.add(hero)
+            db.session.commit()
+        return hero
+
 def seed_initial_data():
     if User.query.first() is None:
         admin = User(
@@ -89,6 +99,10 @@ def seed_initial_data():
             footer_text='Shabaka Invest Group - Votre partenaire de confiance pour la domiciliation et le développement de votre entreprise à Marrakech.'
         )
         db.session.add(settings)
+    
+    if HeroSettings.query.first() is None:
+        hero = HeroSettings()
+        db.session.add(hero)
     
     if Service.query.first() is None:
         services_data = [
