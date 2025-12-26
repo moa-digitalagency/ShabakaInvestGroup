@@ -29,6 +29,7 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 - **Couleur primaire**: Bleu nuit (#0d1a5e à #5a6cff)
 - **Design**: Responsive avec Tailwind CSS
 - **Police**: Poppins
+- **Hero**: Image de fond, overlay dégradé, hauteur adaptative (min-h-screen)
 
 ## Services
 1. Domiciliation d'Entreprise
@@ -37,7 +38,7 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 4. Communication & Image Professionnelle
 
 ## Sections Page d'Accueil
-1. **Hero** - Image de fond bleu nuit overlay, hauteur réduite
+1. **Hero** - Image de fond avec overlay dégradé variable, hauteur plein écran
 2. **À Propos** - Présentation avec checklist
 3. **Solutions complètes** - 2 colonnes de services
 4. **Notre Processus** - 4 étapes (Consultation, Analyse, Exécution, Suivi)
@@ -48,7 +49,12 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 9. **Contact** - Formulaire
 
 ## Recent Changes (26 Dec 2025)
-- Hero redesigné avec image de fond (pas 2 colonnes)
-- Hauteur hero réduite (h-96 md:h-80)
-- Section "Notre Processus" placée APRÈS "Solutions complètes"
-- Suppression section Blog "Conseils et ressources"
+- Hero entièrement redesigné avec style moderne
+- Overlay dégradé multi-couches (opacités variables)
+- Hauteur adaptative à l'écran (min-h-screen)
+- Gradient text sur "entreprise"
+- Animations fade-in et hover effects
+- Stats card avec backdrop blur sur mobile
+- Effets visuels: radial gradients, pulse animations
+- Section Blog supprimée
+- Contenu simplifié et focalisé
