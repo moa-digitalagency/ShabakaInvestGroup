@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden" style="background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600') center/cover; background-attachment: fixed;">
+<section class="min-h-screen w-full flex items-center justify-center relative overflow-hidden" style="background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600') center/cover; background-attachment: fixed;">
     <!-- Couche 1: Overlay noir dégradé principal -->
     <div class="absolute inset-0 bg-gradient-to-r from-primary-950/95 via-primary-900/85 to-primary-800/70 z-0"></div>
     
@@ -20,78 +20,102 @@
     <!-- Couche 5: Ligne accent top -->
     <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-400 to-transparent z-10 opacity-50"></div>
     
-    <!-- Contenu principal CENTRÉ -->
-    <div class="relative z-20 w-full h-full flex flex-col items-center justify-center px-4">
-        <div class="max-w-5xl w-full text-center space-y-8">
-            <!-- Badge introduction -->
-            <div class="animate-fade-in-up" style="animation-delay: 0.1s;">
-                <span class="inline-block text-primary-300 font-semibold text-sm uppercase tracking-[0.3em] backdrop-blur-sm px-5 py-3 rounded-full border border-primary-400/40 hover:border-primary-300/60 transition-all duration-300">
-                    ✨ Transformez votre vision
-                </span>
-            </div>
-            
-            <!-- Titre principal LARGE -->
-            <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight drop-shadow-2xl animate-fade-in-up" style="animation-delay: 0.15s; line-height: 1.1;">
-                Forgez l'avenir de votre <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-200 via-primary-300 to-primary-100 animate-shimmer block">entreprise</span>
-            </h1>
-            
-            <!-- Sous-titre -->
-            <p class="text-xl md:text-2xl text-primary-50 leading-relaxed opacity-95 drop-shadow-lg animate-fade-in-up max-w-3xl mx-auto" style="animation-delay: 0.25s;">
-                Shabaka Invest Group: votre partenaire de confiance à Marrakech pour la domiciliation, création et gestion d'entreprises
-            </p>
-            
-            <!-- Stats row VISIBLE -->
-            <div class="flex justify-center gap-6 md:gap-12 py-8 animate-fade-in-up" style="animation-delay: 0.35s;">
-                <div class="group flex flex-col items-center p-4 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/15 transition-all duration-300">
-                    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white mb-2 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                        <i class="fas fa-chart-line text-2xl"></i>
-                    </div>
-                    <p class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">500+</p>
-                    <p class="text-primary-100 text-xs md:text-sm font-medium mt-1">Entreprises</p>
+    <!-- Contenu principal -->
+    <div class="max-w-7xl mx-auto px-4 relative z-20 w-full py-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center min-h-screen md:min-h-auto md:py-20">
+            <!-- Colonne gauche: Texte -->
+            <div class="text-center md:text-left">
+                <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <span class="inline-block text-primary-300 font-semibold text-xs uppercase tracking-[0.2em] mb-4 opacity-90 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-400/30">
+                        ✨ Bienvenue chez Shabaka Invest
+                    </span>
                 </div>
                 
-                <div class="group flex flex-col items-center p-4 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/15 transition-all duration-300">
-                    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white mb-2 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                        <i class="fas fa-trophy text-2xl"></i>
-                    </div>
-                    <p class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">15+</p>
-                    <p class="text-primary-100 text-xs md:text-sm font-medium mt-1">Ans d'expérience</p>
-                </div>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-2xl animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Forgez l'avenir de votre <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-200 via-primary-300 to-primary-100 animate-shimmer">entreprise</span>
+                </h1>
                 
-                <div class="group flex flex-col items-center p-4 md:p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/40 hover:bg-white/15 transition-all duration-300">
-                    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-primary-400 to-primary-700 rounded-full flex items-center justify-center text-white mb-2 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                        <i class="fas fa-star text-2xl"></i>
-                    </div>
-                    <p class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">100%</p>
-                    <p class="text-primary-100 text-xs md:text-sm font-medium mt-1">Satisfait</p>
+                <p class="text-lg md:text-xl text-primary-50 mb-10 leading-relaxed max-w-2xl opacity-95 drop-shadow-lg animate-fade-in-up" style="animation-delay: 0.3s;">
+                    Votre partenaire de confiance à Marrakech pour la domiciliation, création et gestion d'entreprises au Maroc
+                </p>
+                
+                <div class="flex flex-wrap gap-4 md:justify-start justify-center animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <a href="{{ url_for('public.services') }}" class="group relative nav-btn text-white px-8 py-4 rounded-full font-semibold overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-700 to-primary-900 group-hover:from-primary-600 group-hover:to-primary-800 transition-all duration-300"></div>
+                        <span class="relative flex items-center">
+                            <i class="fas fa-sparkles mr-2 group-hover:rotate-12 transition-transform"></i>
+                            Nos Services
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </a>
+                    <a href="{{ url_for('public.contact') }}" class="group relative border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110 backdrop-blur-sm bg-white/5">
+                        <span class="relative flex items-center">
+                            Demander un Devis
+                            <i class="fas fa-chevron-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </a>
                 </div>
             </div>
             
-            <!-- Boutons CTA -->
-            <div class="flex flex-wrap gap-4 justify-center pt-4 animate-fade-in-up" style="animation-delay: 0.45s;">
-                <a href="{{ url_for('public.services') }}" class="group relative nav-btn text-white px-10 py-4 rounded-full font-bold text-lg overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-r from-primary-700 to-primary-900 group-hover:from-primary-600 group-hover:to-primary-800 transition-all duration-300"></div>
-                    <span class="relative flex items-center justify-center">
-                        <i class="fas fa-rocket mr-2 group-hover:scale-125 transition-transform"></i>
-                        Démarrer
-                    </span>
-                </a>
-                <a href="{{ url_for('public.contact') }}" class="group relative border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-primary-900 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110 backdrop-blur-sm bg-white/5">
-                    <span class="relative flex items-center justify-center">
-                        <i class="fas fa-phone mr-2"></i>
-                        Contacter
-                    </span>
-                </a>
+            <!-- Colonne droite: Stats card -->
+            <div class="hidden md:flex items-center justify-center relative animate-fade-in-up" style="animation-delay: 0.5s;">
+                <!-- Glow background animé -->
+                <div class="absolute w-96 h-96 bg-gradient-to-r from-primary-600/30 to-primary-400/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
+                <div class="absolute w-64 h-64 bg-gradient-to-l from-primary-500/20 to-primary-300/10 rounded-full blur-3xl animate-pulse" style="animation-duration: 5s; animation-delay: 1s;"></div>
+                
+                <!-- Card principale -->
+                <div class="relative z-10 w-full max-w-md">
+                    <div class="group relative overflow-hidden rounded-3xl backdrop-blur-xl bg-white/10 border border-white/30 p-8 shadow-2xl hover:shadow-2xl hover:border-white/50 transition-all duration-500 hover:bg-white/15">
+                        <!-- Gradient background animé -->
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1) 0%, transparent 80%);"></div>
+                        
+                        <!-- Contenu stats -->
+                        <div class="space-y-6 relative z-10">
+                            <div class="group/stat flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-white/5 to-transparent group-hover/stat:from-white/10 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white shadow-lg group-hover/stat:shadow-xl group-hover/stat:scale-110 transition-all duration-300">
+                                    <i class="fas fa-chart-line text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-bold text-white drop-shadow-lg">500+</p>
+                                    <p class="text-primary-100 text-sm font-medium">Entreprises créées</p>
+                                </div>
+                            </div>
+                            
+                            <div class="group/stat flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-white/5 to-transparent group-hover/stat:from-white/10 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white shadow-lg group-hover/stat:shadow-xl group-hover/stat:scale-110 transition-all duration-300">
+                                    <i class="fas fa-trophy text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-bold text-white drop-shadow-lg">15+</p>
+                                    <p class="text-primary-100 text-sm font-medium">Ans d'expérience</p>
+                                </div>
+                            </div>
+                            
+                            <div class="group/stat flex items-center space-x-4 p-4 rounded-2xl bg-gradient-to-r from-white/5 to-transparent group-hover/stat:from-white/10 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-700 rounded-full flex items-center justify-center text-white shadow-lg group-hover/stat:shadow-xl group-hover/stat:scale-110 transition-all duration-300">
+                                    <i class="fas fa-star text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-bold text-white drop-shadow-lg">100%</p>
+                                    <p class="text-primary-100 text-sm font-medium">Satisfaction</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ligne accent -->
+                        <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-400 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
     <!-- Scroll indicator -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <div class="text-white/60 flex flex-col items-center gap-3 hover:text-white transition-colors">
-            <span class="text-xs uppercase tracking-widest font-semibold">Scroll pour découvrir</span>
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+        <div class="text-white/50 flex flex-col items-center gap-2">
+            <span class="text-xs uppercase tracking-widest font-semibold">Découvrez plus</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
     </div>
