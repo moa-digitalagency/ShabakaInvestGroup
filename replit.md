@@ -84,3 +84,16 @@ Site web complet pour Shabaka Invest Group, une société de domiciliation, cré
 - **Route /admin/hero**: Interface complète pour personnaliser tous les éléments du hero
 - **Données dynamiques**: Le hero utilise les données de la base de données avec fallback defaults
 - **WhatsApp Integration**: Bouton "Devis Gratuit" lié à WhatsApp avec numéro configurable dans les paramètres du site (site_settings.whatsapp)
+
+### Admin Panel - Gestion des Projets (CRUD)
+- **Project Model**: title, slug, description, image (upload), link, category, client_name, is_featured, is_active, order
+- **Routes**: /admin/projects (liste), /admin/projects/new (créer), /admin/projects/<id>/edit (modifier), /admin/projects/<id>/delete (supprimer)
+- **Upload d'images**: Images stockées dans static/uploads/projects/
+
+### Admin Panel - Paramètres du Site Avancés
+- **Réseaux sociaux**: Facebook, LinkedIn, Instagram, Twitter, YouTube - tous configurables et affichés dynamiquement dans le footer
+- **Coordonnées**: Email, téléphone, adresse, WhatsApp
+- **SEO Avancé**: 
+  - Code personnalisé dans le `<head>` (Google Tag Manager, Pixel Facebook, etc.)
+  - Code personnalisé avant `</body>` (chatbots, scripts de tracking)
+- **Footer dynamique**: Les icônes des réseaux sociaux s'affichent uniquement si configurés
