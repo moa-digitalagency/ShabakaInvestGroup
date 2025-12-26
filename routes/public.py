@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
-from src.modeles import db, Service, Testimonial, ContactSubmission, SiteSettings
-from src.services import ContentService, TestimonialService, ContactService, SettingsService, SEOService
+from modeles import db, Service, Testimonial, ContactSubmission, SiteSettings
+from services import ContentService, TestimonialService, ContactService, SettingsService, SEOService
 
 public_bp = Blueprint('public', __name__)
 

@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
-from src.modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset
-from src.security import verify_password, hash_password, admin_required
-from src.services import ContactService, SettingsService
-from src.utils import save_uploaded_file, slugify
+from modeles import db, User, Service, Testimonial, ContactSubmission, SiteSettings, SEOSettings, MediaAsset
+from security import verify_password, hash_password, admin_required
+from services import ContactService, SettingsService
+from utils import save_uploaded_file, slugify
 from datetime import datetime
 import os
 

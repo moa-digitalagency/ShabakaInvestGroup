@@ -1,5 +1,5 @@
-from src.modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User
-from src.security import hash_password
+from modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User
+from security import hash_password
 from datetime import datetime
 
 class ContentService:
