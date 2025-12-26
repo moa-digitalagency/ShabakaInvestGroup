@@ -2,33 +2,33 @@
 
 {% block content %}
 <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920" alt="Construction" class="w-full h-full object-cover">
+    <div class="absolute inset-0 opacity-10">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920" alt="Business" class="w-full h-full object-cover">
     </div>
     <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="text-white">
-                <span class="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <i class="fas fa-star mr-2"></i>Service N°1 au Maroc
+                <span class="inline-block bg-primary-500/20 border border-primary-400 text-primary-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    Votre partenaire à Marrakech
                 </span>
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                    Solutions Complètes pour votre <span class="text-primary-500">Entreprise</span> à Marrakech
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    Forgez l'avenir de votre <span class="text-primary-400">entreprise</span>
                 </h1>
                 <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                    Shabaka Invest Group offre des services de domiciliation d'entreprise, conseils experts et gestion de projet complète.
+                    Shabaka Invest Group, société spécialisée dans la domiciliation, la création et la gestion d'entreprises. Nous accompagnons les entrepreneurs et investisseurs au Maroc.
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ url_for('public.services') }}" class="bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg flex items-center">
-                        <i class="fas fa-briefcase mr-2"></i>Nos Services
+                        <i class="fas fa-rocket mr-2"></i>Découvrir nos services
                     </a>
                     <a href="{{ url_for('public.contact') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-secondary-900 transition font-semibold text-lg">
-                        Demander un Devis
+                        Nous contacter
                     </a>
                 </div>
             </div>
             <div class="hidden md:block">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600" alt="Nettoyage professionnel" class="rounded-2xl shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600" alt="Bureau moderne" class="rounded-2xl shadow-2xl">
                     <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg">
                         <div class="flex items-center space-x-4">
                             <div class="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center">
@@ -36,7 +36,7 @@
                             </div>
                             <div>
                                 <p class="text-2xl font-bold text-secondary-900">500+</p>
-                                <p class="text-gray-600">Projets Réalisés</p>
+                                <p class="text-gray-600">Entreprises accompagnées</p>
                             </div>
                         </div>
                     </div>
@@ -46,19 +46,64 @@
     </div>
 </section>
 
-
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600" alt="Équipe Shabaka" class="rounded-2xl shadow-xl">
+            </div>
+            <div>
+                <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">À propos</span>
+                <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-6">Une équipe dédiée à la réussite de votre projet</h2>
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    <strong>Shabaka Invest Group</strong>, basé à Marrakech, accompagne les porteurs de projets, PME et investisseurs dans toutes les étapes de la vie de leur entreprise.
+                </p>
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                            <i class="fas fa-check text-primary-600 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700">Structurer votre projet et choisir la bonne forme juridique</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                            <i class="fas fa-check text-primary-600 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700">Installer votre siège social dans une adresse professionnelle</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                            <i class="fas fa-check text-primary-600 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700">Mettre en place une stratégie de communication adaptée</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                            <i class="fas fa-check text-primary-600 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700">Optimiser votre organisation pour gagner en efficacité</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('public.about') }}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
+                    En savoir plus sur nous <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-            <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Ce que nous offrons</span>
-            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Nos Services</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Des solutions complètes pour votre entreprise à Marrakech</p>
+            <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Nos Services</span>
+            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Des solutions complètes pour les entrepreneurs</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">De la création à la gestion, nous mettons en place des solutions sur mesure pour sécuriser vos démarches.</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for service in featured_services %}
-            <div class="service-card bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition duration-300 hover:shadow-xl">
-                <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-{{ service.icon or 'briefcase' }} text-2xl text-primary-600"></i>
+            <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 transition duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary-600 transition">
+                    <i class="fas fa-{{ service.icon or 'briefcase' }} text-2xl text-primary-600 group-hover:text-white transition"></i>
                 </div>
                 <h3 class="text-xl font-bold text-secondary-900 mb-3">{{ service.name }}</h3>
                 <p class="text-gray-600 mb-6">{{ service.short_description }}</p>
@@ -75,20 +120,61 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid md:grid-cols-4 gap-8 text-center">
             <div>
-                <div class="text-5xl font-bold text-primary-500 mb-2">500+</div>
-                <p class="text-gray-400">Projets Réalisés</p>
+                <div class="text-5xl font-bold text-primary-400 mb-2">500+</div>
+                <p class="text-gray-400">Entreprises créées</p>
             </div>
             <div>
-                <div class="text-5xl font-bold text-primary-500 mb-2">15+</div>
-                <p class="text-gray-400">Années d'Expérience</p>
+                <div class="text-5xl font-bold text-primary-400 mb-2">15+</div>
+                <p class="text-gray-400">Années d'expérience</p>
             </div>
             <div>
-                <div class="text-5xl font-bold text-primary-500 mb-2">200+</div>
-                <p class="text-gray-400">Clients Satisfaits</p>
+                <div class="text-5xl font-bold text-primary-400 mb-2">98%</div>
+                <p class="text-gray-400">Clients satisfaits</p>
             </div>
             <div>
-                <div class="text-5xl font-bold text-primary-500 mb-2">100%</div>
-                <p class="text-gray-400">Satisfaction Garantie</p>
+                <div class="text-5xl font-bold text-primary-400 mb-2">50+</div>
+                <p class="text-gray-400">Partenaires de confiance</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Projets</span>
+            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Exemples de projets accompagnés</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600" alt="PME B2B" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="text-primary-600 text-sm font-medium">Création d'entreprise</span>
+                    <h3 class="text-xl font-bold text-secondary-900 mt-2 mb-3">PME de services B2B à Marrakech</h3>
+                    <p class="text-gray-600">Accompagnement complet : structure juridique, domiciliation, identité de marque et stratégie commerciale.</p>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=600" alt="Investissement" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="text-primary-600 text-sm font-medium">Implantation</span>
+                    <h3 class="text-xl font-bold text-secondary-900 mt-2 mb-3">Société d'investissement étrangère</h3>
+                    <p class="text-gray-600">Support administratif local, coordination avec les partenaires et intégration dans l'écosystème marocain.</p>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-2xl overflow-hidden group">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600" alt="Agence" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="text-primary-600 text-sm font-medium">Développement</span>
+                    <h3 class="text-xl font-bold text-secondary-900 mt-2 mb-3">Agence de services en croissance</h3>
+                    <p class="text-gray-600">Clarification de l'offre, organisation interne, outils de communication et plan de développement.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -99,7 +185,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
             <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Témoignages</span>
-            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Ce que disent nos clients</h2>
+            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Ce que nos clients disent de nous</h2>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
             {% for testimonial in testimonials[:3] %}
@@ -109,7 +195,7 @@
                     <i class="fas fa-star text-yellow-400"></i>
                     {% endfor %}
                 </div>
-                <p class="text-gray-600 mb-6 italic">"{{ testimonial.content }}"</p>
+                <p class="text-gray-600 mb-6 italic text-lg">"{{ testimonial.content }}"</p>
                 <div class="flex items-center">
                     <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
                         <span class="text-primary-600 font-bold">{{ testimonial.author_name[0] }}</span>
@@ -122,22 +208,56 @@
             </div>
             {% endfor %}
         </div>
-        <div class="text-center mt-10">
-            <a href="{{ url_for('public.testimonials') }}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
-                Voir tous les témoignages <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
     </div>
 </section>
 {% endif %}
 
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Pourquoi nous ?</span>
+            <h2 class="text-4xl font-bold text-secondary-900 mt-2 mb-4">Pourquoi choisir Shabaka Invest Group ?</h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-map-marker-alt text-3xl text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-secondary-900 mb-3">Expertise locale</h3>
+                <p class="text-gray-600">Connaissance approfondie du contexte marocain et de l'écosystème de Marrakech.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-user-tie text-3xl text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-secondary-900 mb-3">Accompagnement personnalisé</h3>
+                <p class="text-gray-600">Solutions adaptées à chaque profil d'entrepreneur et à vos besoins spécifiques.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-handshake text-3xl text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-secondary-900 mb-3">Réseau de partenaires</h3>
+                <p class="text-gray-600">Accès à un réseau de professionnels pour une solution globale.</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shield-alt text-3xl text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-secondary-900 mb-3">Sécurité & confiance</h3>
+                <p class="text-gray-600">Réduction des risques et image professionnelle renforcée.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="py-20 bg-primary-600">
     <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold text-white mb-6">Prêt à transformer votre espace ?</h2>
-        <p class="text-xl text-primary-100 mb-8">Contactez-nous dès maintenant pour un devis gratuit et personnalisé.</p>
+        <h2 class="text-4xl font-bold text-white mb-6">Prêt à lancer votre projet ?</h2>
+        <p class="text-xl text-primary-100 mb-8">Discutons de votre projet de création, domiciliation ou développement d'entreprise à Marrakech.</p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ url_for('public.contact') }}" class="bg-white text-primary-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition font-semibold text-lg">
-                Demander un Devis
+                Parler à un conseiller
             </a>
             {% if site_settings and site_settings.whatsapp %}
             <a href="https://wa.me/{{ site_settings.whatsapp }}" class="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-primary-600 transition font-semibold text-lg flex items-center">

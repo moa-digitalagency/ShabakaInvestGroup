@@ -99,8 +99,6 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ url_for('public.home') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Accueil</a>
-                    <a href="{{ url_for('public.domiciliation') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Domiciliation</a>
-                    <a href="{{ url_for('public.consulting') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Conseils</a>
                     <a href="{{ url_for('public.services') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">Services</a>
                     <a href="{{ url_for('public.about') }}" class="nav-link text-secondary-700 hover:text-primary-600 font-medium">À Propos</a>
                     <a href="{{ url_for('public.contact') }}" class="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition font-medium">Contact</a>
@@ -115,8 +113,6 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-4 space-y-3">
                 <a href="{{ url_for('public.home') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Accueil</a>
-                <a href="{{ url_for('public.domiciliation') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Domiciliation</a>
-                <a href="{{ url_for('public.consulting') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Conseils</a>
                 <a href="{{ url_for('public.services') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">Services</a>
                 <a href="{{ url_for('public.about') }}" class="block text-secondary-700 hover:text-primary-600 font-medium py-2">À Propos</a>
                 <a href="{{ url_for('public.contact') }}" class="block bg-primary-600 text-white px-6 py-2.5 rounded-lg text-center hover:bg-primary-700 transition font-medium">Contact</a>
@@ -174,9 +170,9 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Services</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ url_for('public.domiciliation') }}" class="text-gray-400 hover:text-primary-500 transition">Domiciliation</a></li>
-                        <li><a href="{{ url_for('public.consulting') }}" class="text-gray-400 hover:text-primary-500 transition">Conseils</a></li>
-                        <li><a href="{{ url_for('public.services') }}" class="text-gray-400 hover:text-primary-500 transition">Tous les Services</a></li>
+                        <li><a href="{{ url_for('public.services') }}" class="text-gray-400 hover:text-primary-500 transition">Tous nos services</a></li>
+                        <li><a href="{{ url_for('public.about') }}" class="text-gray-400 hover:text-primary-500 transition">À propos</a></li>
+                        <li><a href="{{ url_for('public.contact') }}" class="text-gray-400 hover:text-primary-500 transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>

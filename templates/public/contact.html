@@ -3,8 +3,8 @@
 {% block content %}
 <section class="hero-gradient py-24">
     <div class="max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-5xl font-bold text-white mb-6">Contactez-nous</h1>
-        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Nous sommes à votre disposition pour répondre à toutes vos questions.</p>
+        <h1 class="text-5xl font-bold text-white mb-6">Discutons de votre projet</h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">Vous avez un projet de création d'entreprise, de domiciliation ou de développement à Marrakech ? Contactez-nous.</p>
     </div>
 </section>
 
@@ -17,11 +17,11 @@
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token is defined else '' }}">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom complet *</label>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom / Prénom *</label>
                             <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
                             <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                         </div>
                     </div>
@@ -36,20 +36,22 @@
                         </div>
                     </div>
                     <div>
-                        <label for="service_interest" class="block text-sm font-medium text-gray-700 mb-2">Service qui vous intéresse</label>
+                        <label for="service_interest" class="block text-sm font-medium text-gray-700 mb-2">Type de projet</label>
                         <select id="service_interest" name="service_interest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            <option value="">Sélectionnez un service</option>
-                            {% for service in services %}
-                            <option value="{{ service.slug }}" {% if request.args.get('service') == service.slug %}selected{% endif %}>{{ service.name }}</option>
-                            {% endfor %}
+                            <option value="">Sélectionnez un type de projet</option>
+                            <option value="creation">Création d'entreprise</option>
+                            <option value="domiciliation">Domiciliation</option>
+                            <option value="developpement">Développement / Conseil</option>
+                            <option value="communication">Communication / Marketing</option>
+                            <option value="autre">Autre</option>
                         </select>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Votre message *</label>
-                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"></textarea>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message détaillé *</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Décrivez votre projet, vos besoins et vos objectifs..."></textarea>
                     </div>
                     <button type="submit" class="w-full bg-primary-600 text-white py-4 rounded-lg hover:bg-primary-700 transition font-semibold text-lg">
-                        <i class="fas fa-paper-plane mr-2"></i>Envoyer le message
+                        <i class="fas fa-paper-plane mr-2"></i>Envoyer ma demande
                     </button>
                 </form>
             </div>
@@ -85,22 +87,44 @@
                                 <p class="text-gray-600">{{ site_settings.email }}</p>
                             </div>
                         </div>
-                        {% if site_settings.whatsapp %}
+                        {% endif %}
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-primary-600"></i>
                             </div>
                             <div>
-                                <h3 class="font-semibold text-secondary-900 mb-1">WhatsApp</h3>
-                                <a href="https://wa.me/{{ site_settings.whatsapp }}" class="text-green-600 hover:text-green-700">Discuter sur WhatsApp</a>
+                                <h3 class="font-semibold text-secondary-900 mb-1">Horaires</h3>
+                                <p class="text-gray-600">Lundi - Vendredi : 9h - 18h</p>
                             </div>
                         </div>
-                        {% endif %}
-                        {% endif %}
                     </div>
                 </div>
-                <div class="rounded-2xl overflow-hidden shadow-lg h-64">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108703.09825878441!2d-8.06348515!3d31.63472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakech!5e0!3m2!1sfr!2sma!4v1635000000000!5m2!1sfr!2sma" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                
+                <div class="bg-primary-50 rounded-2xl p-8">
+                    <h3 class="font-bold text-secondary-900 mb-4">Suivez-nous</h3>
+                    <p class="text-gray-600 mb-4">Découvrez nos actualités, conseils et retours d'expérience d'entrepreneurs.</p>
+                    <div class="flex space-x-4">
+                        {% if site_settings and site_settings.facebook %}
+                        <a href="{{ site_settings.facebook }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        {% endif %}
+                        {% if site_settings and site_settings.linkedin %}
+                        <a href="{{ site_settings.linkedin }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        {% endif %}
+                        {% if site_settings and site_settings.instagram %}
+                        <a href="{{ site_settings.instagram }}" class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white hover:bg-primary-700 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        {% endif %}
+                        {% if site_settings and site_settings.whatsapp %}
+                        <a href="https://wa.me/{{ site_settings.whatsapp }}" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
