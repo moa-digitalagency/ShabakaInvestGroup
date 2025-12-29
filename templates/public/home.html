@@ -51,21 +51,12 @@
                                 {{ hero.btn1_text if hero else 'Nos Services' }}
                             </span>
                         </a>
-                        {% if hero and hero.btn2_is_whatsapp and site_settings.whatsapp %}
-                        <a href="https://wa.me/{{ site_settings.whatsapp|replace('+', '')|replace(' ', '') }}?text=Bonjour%2C%20je%20souhaite%20demander%20un%20devis." target="_blank" class="group relative text-white px-9 py-4 rounded-full font-bold text-lg border-2 border-white hover:border-green-400 bg-white/10 backdrop-blur-md hover:bg-green-500/20 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-110">
+                        <button onclick="openDevisModal()" class="group relative text-white px-9 py-4 rounded-full font-bold text-lg border-2 border-white hover:border-green-400 bg-white/10 backdrop-blur-md hover:bg-green-500/20 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-110">
                             <span class="relative flex items-center justify-center gap-3">
                                 <i class="fab fa-whatsapp text-xl"></i>
                                 {{ hero.btn2_text if hero else 'Devis Gratuit' }}
                             </span>
-                        </a>
-                        {% else %}
-                        <a href="{{ url_for('public.contact') }}" class="group relative text-white px-9 py-4 rounded-full font-bold text-lg border-2 border-white hover:border-primary-300 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-110">
-                            <span class="relative flex items-center justify-center gap-3">
-                                {{ hero.btn2_text if hero else 'Devis Gratuit' }}
-                                <i class="fas {{ hero.btn2_icon if hero else 'fa-arrow-right' }} group-hover:translate-x-1 transition-transform text-lg"></i>
-                            </span>
-                        </a>
-                        {% endif %}
+                        </button>
                     </div>
                 </div>
                 

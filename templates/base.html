@@ -113,9 +113,9 @@
                     <a href="{{ url_for('public.about') }}" class="text-gray-700 hover:text-primary-900 font-medium">À Propos</a>
                     <a href="{{ url_for('public.services') }}" class="text-gray-700 hover:text-primary-900 font-medium">Services</a>
                     <a href="{{ url_for('public.contact') }}" class="text-gray-700 hover:text-primary-900 font-medium">Contact</a>
-                    <a href="{{ url_for('public.contact') }}" class="nav-btn text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
+                    <button onclick="openDevisModal()" class="nav-btn text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
                         Demander un Devis <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    </button>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-gray-700">
@@ -129,7 +129,10 @@
                 <a href="{{ url_for('public.home') }}" class="block text-gray-700 font-medium py-2">Accueil</a>
                 <a href="{{ url_for('public.about') }}" class="block text-gray-700 font-medium py-2">À Propos</a>
                 <a href="{{ url_for('public.services') }}" class="block text-gray-700 font-medium py-2">Services</a>
-                <a href="{{ url_for('public.contact') }}" class="block nav-btn text-white px-6 py-3 rounded-full text-center font-medium">Contact</a>
+                <a href="{{ url_for('public.contact') }}" class="block text-gray-700 font-medium py-2">Contact</a>
+                <button onclick="openDevisModal()" class="block w-full nav-btn text-white px-6 py-3 rounded-full text-center font-medium">
+                    <i class="fab fa-whatsapp mr-2"></i>Demander un Devis
+                </button>
             </div>
         </div>
     </nav>
@@ -227,9 +230,95 @@
         </div>
     </footer>
 
+    <!-- Modal Devis WhatsApp -->
+    <div id="devisModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeDevisModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+            <div class="bg-white rounded-2xl shadow-2xl p-8 mx-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Demander un Devis</h3>
+                    <button onclick="closeDevisModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="devisForm" onsubmit="submitDevis(event)">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nom complet *</label>
+                            <input type="text" id="devis_nom" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Votre nom">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Téléphone *</label>
+                            <input type="tel" id="devis_tel" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="+212 6XX XXX XXX">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Service souhaité</label>
+                            <select id="devis_service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                                <option value="">Sélectionnez un service</option>
+                                <option value="Domiciliation d'Entreprise">Domiciliation d'Entreprise</option>
+                                <option value="Création d'Entreprise">Création d'Entreprise</option>
+                                <option value="Conseil Stratégique">Conseil Stratégique</option>
+                                <option value="Marketing et Communication">Marketing et Communication</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message (optionnel)</label>
+                            <textarea id="devis_message" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Décrivez brièvement votre besoin..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center gap-3 transition">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        Envoyer via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const whatsappNumber = '{{ site_settings.whatsapp|replace("+", "")|replace(" ", "") if site_settings and site_settings.whatsapp else "212600000000" }}';
+        
+        function openDevisModal() {
+            document.getElementById('devisModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDevisModal() {
+            document.getElementById('devisModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        function submitDevis(e) {
+            e.preventDefault();
+            const nom = document.getElementById('devis_nom').value;
+            const tel = document.getElementById('devis_tel').value;
+            const service = document.getElementById('devis_service').value;
+            const message = document.getElementById('devis_message').value;
+            
+            let whatsappMessage = `Bonjour Shabaka Invest,\n\n`;
+            whatsappMessage += `Je suis *${nom}*\n`;
+            whatsappMessage += `Téléphone: ${tel}\n`;
+            if (service) {
+                whatsappMessage += `Service souhaité: ${service}\n`;
+            }
+            if (message) {
+                whatsappMessage += `\nMessage: ${message}\n`;
+            }
+            whatsappMessage += `\nJe souhaite demander un devis. Merci de me recontacter.`;
+            
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+            closeDevisModal();
+            document.getElementById('devisForm').reset();
+        }
+        
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeDevisModal();
         });
         
         setTimeout(function() {
