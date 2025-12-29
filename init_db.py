@@ -97,15 +97,14 @@ def seed_hero_settings():
             print("Hero section existe déjà.")
 
 def seed_services():
-    """Ajoute les services par défaut."""
+    """Ajoute les services par défaut (ajoute les manquants si certains existent déjà)."""
     with app.app_context():
-        if Service.query.first() is None:
-            services_data = [
-                {
-                    'name': 'Domiciliation d\'Entreprise',
-                    'slug': 'domiciliation-entreprise',
-                    'short_description': 'Adresse professionnelle à Marrakech avec gestion du courrier et justificatifs conformes.',
-                    'description': '''<h3>Une adresse commerciale prestigieuse à Marrakech</h3>
+        services_data = [
+            {
+                'name': 'Domiciliation d\'Entreprise',
+                'slug': 'domiciliation-entreprise',
+                'short_description': 'Adresse professionnelle à Marrakech avec gestion du courrier et justificatifs conformes.',
+                'description': '''<h3>Une adresse commerciale prestigieuse à Marrakech</h3>
 <p>La domiciliation d'entreprise chez Shabaka Invest Group vous offre une adresse commerciale de prestige au cœur de Marrakech.</p>
 <h4>Nos services incluent :</h4>
 <ul>
@@ -116,16 +115,16 @@ def seed_services():
 <li>Accompagnement administratif</li>
 </ul>
 <p>Idéal pour les entrepreneurs, freelances et sociétés souhaitant établir leur présence à Marrakech sans les coûts d'un bureau permanent.</p>''',
-                    'icon': 'building',
-                    'features': 'Adresse commerciale prestigieuse,Réception du courrier,Accueil téléphonique,Salles de réunion,Support administratif,Flexibilité totale',
-                    'is_featured': True,
-                    'order': 1
-                },
-                {
-                    'name': 'Création d\'Entreprise',
-                    'slug': 'creation-entreprise',
-                    'short_description': 'Accompagnement complet pour la création de votre société au Maroc.',
-                    'description': '''<h3>Créez votre entreprise au Maroc en toute simplicité</h3>
+                'icon': 'building',
+                'features': 'Adresse commerciale prestigieuse,Réception du courrier,Accueil téléphonique,Salles de réunion,Support administratif,Flexibilité totale',
+                'is_featured': True,
+                'order': 1
+            },
+            {
+                'name': 'Création d\'Entreprise',
+                'slug': 'creation-entreprise',
+                'short_description': 'Accompagnement complet pour la création de votre société au Maroc.',
+                'description': '''<h3>Créez votre entreprise au Maroc en toute simplicité</h3>
 <p>Nous vous accompagnons dans toutes les démarches de création de votre entreprise au Maroc.</p>
 <h4>Notre accompagnement comprend :</h4>
 <ul>
@@ -135,16 +134,16 @@ def seed_services():
 <li>Obtention du numéro d'identification fiscale</li>
 <li>Ouverture du compte bancaire professionnel</li>
 </ul>''',
-                    'icon': 'file-signature',
-                    'features': 'Choix forme juridique,Rédaction statuts,Immatriculation RC,Numéro fiscal,Compte bancaire,Accompagnement complet',
-                    'is_featured': True,
-                    'order': 2
-                },
-                {
-                    'name': 'Conseil Stratégique',
-                    'slug': 'conseil-strategique',
-                    'short_description': 'Expertise et accompagnement stratégique pour le développement de votre activité.',
-                    'description': '''<h3>Un accompagnement expert pour votre croissance</h3>
+                'icon': 'file-signature',
+                'features': 'Choix forme juridique,Rédaction statuts,Immatriculation RC,Numéro fiscal,Compte bancaire,Accompagnement complet',
+                'is_featured': True,
+                'order': 2
+            },
+            {
+                'name': 'Conseil Stratégique',
+                'slug': 'conseil-strategique',
+                'short_description': 'Expertise et accompagnement stratégique pour le développement de votre activité.',
+                'description': '''<h3>Un accompagnement expert pour votre croissance</h3>
 <p>Nos experts vous accompagnent dans toutes les étapes de développement de votre entreprise.</p>
 <h4>Nos domaines d'expertise :</h4>
 <ul>
@@ -154,16 +153,16 @@ def seed_services():
 <li>Ressources humaines</li>
 <li>Développement commercial</li>
 </ul>''',
-                    'icon': 'lightbulb',
-                    'features': 'Stratégie commerciale,Optimisation fiscale,Gestion financière,Conseil RH,Business development',
-                    'is_featured': True,
-                    'order': 3
-                },
-                {
-                    'name': 'Marketing et communication',
-                    'slug': 'marketing-communication',
-                    'short_description': 'Développement de stratégies marketing pour optimiser la visibilité et la commercialisation de votre entreprise.',
-                    'description': '''<h3>Amplifiez votre visibilité et commercialisation</h3>
+                'icon': 'lightbulb',
+                'features': 'Stratégie commerciale,Optimisation fiscale,Gestion financière,Conseil RH,Business development',
+                'is_featured': True,
+                'order': 3
+            },
+            {
+                'name': 'Marketing et communication',
+                'slug': 'marketing-communication',
+                'short_description': 'Développement de stratégies marketing pour optimiser la visibilité et la commercialisation de votre entreprise.',
+                'description': '''<h3>Amplifiez votre visibilité et commercialisation</h3>
 <p>Nous développons des stratégies marketing complètes pour optimiser la visibilité et la commercialisation de votre entreprise.</p>
 <h4>Nos domaines d'expertise :</h4>
 <ul>
@@ -174,19 +173,27 @@ def seed_services():
 <li>Supports de communication et print</li>
 <li>Campagnes publicitaires et promotion</li>
 </ul>''',
-                    'icon': 'bullhorn',
-                    'features': 'Stratégie marketing,Identité visuelle,Site web,Réseaux sociaux,Supports digitaux,Gestion de marque',
-                    'is_featured': True,
-                    'order': 4
-                }
-            ]
-            for data in services_data:
+                'icon': 'bullhorn',
+                'features': 'Stratégie marketing,Identité visuelle,Site web,Réseaux sociaux,Supports digitaux,Gestion de marque',
+                'is_featured': True,
+                'order': 4
+            }
+        ]
+        
+        added_count = 0
+        for data in services_data:
+            existing = Service.query.filter_by(slug=data['slug']).first()
+            if existing is None:
                 service = Service(**data)
                 db.session.add(service)
+                added_count += 1
+                print(f"  + Service ajouté: {data['name']}")
+        
+        if added_count > 0:
             db.session.commit()
-            print(f"{len(services_data)} services créés.")
+            print(f"{added_count} nouveau(x) service(s) ajouté(s).")
         else:
-            print("Services existent déjà.")
+            print("Tous les services existent déjà.")
 
 def seed_testimonials():
     """Ajoute les témoignages par défaut."""
