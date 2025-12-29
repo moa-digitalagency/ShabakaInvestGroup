@@ -70,9 +70,10 @@ def seed_site_settings():
             print("Paramètres du site existent déjà.")
 
 def seed_hero_settings():
-    """Configure le hero section par défaut."""
+    """Configure le hero section par défaut (met à jour si existe déjà)."""
     with app.app_context():
-        if HeroSettings.query.first() is None:
+        hero = HeroSettings.query.first()
+        if hero is None:
             hero = HeroSettings(
                 badge_text='Bienvenue chez Shabaka Invest',
                 title_main="Forgez l'avenir de votre",
@@ -83,8 +84,8 @@ def seed_hero_settings():
                 btn1_link='/services',
                 btn2_text='Devis Gratuit',
                 btn2_is_whatsapp=True,
-                metric1_value='500+',
-                metric1_label='Entreprises créées',
+                metric1_value='90%',
+                metric1_label='de croissance pour clients',
                 metric2_value='15+',
                 metric2_label="Ans d'expérience",
                 metric3_value='100%',
@@ -94,7 +95,10 @@ def seed_hero_settings():
             db.session.commit()
             print("Hero section configurée.")
         else:
-            print("Hero section existe déjà.")
+            hero.metric1_value = '90%'
+            hero.metric1_label = 'de croissance pour clients'
+            db.session.commit()
+            print("Hero section mise à jour.")
 
 def seed_services():
     """Ajoute les services par défaut (ajoute les manquants si certains existent déjà)."""
@@ -196,42 +200,72 @@ def seed_services():
             print("Tous les services existent déjà.")
 
 def seed_testimonials():
-    """Ajoute les témoignages par défaut."""
+    """Ajoute les témoignages par défaut (ajoute les manquants)."""
     with app.app_context():
-        if Testimonial.query.first() is None:
-            testimonials_data = [
-                {
-                    'author_name': 'Ahmed Benali',
-                    'author_company': 'Tech Solutions Maroc',
-                    'author_position': 'Directeur Général',
-                    'content': 'Excellent service de domiciliation ! L\'équipe de Shabaka Invest Group est très professionnelle et réactive. Je recommande vivement pour tout entrepreneur souhaitant s\'installer à Marrakech.',
-                    'rating': 5,
-                    'is_featured': True
-                },
-                {
-                    'author_name': 'Karim Tazi',
-                    'author_company': 'Import Export KT',
-                    'author_position': 'Fondateur',
-                    'content': 'Grâce à leurs conseils, j\'ai pu créer mon entreprise rapidement et efficacement. Un accompagnement de qualité du début à la fin. Merci à toute l\'équipe !',
-                    'rating': 5,
-                    'is_featured': True
-                },
-                {
-                    'author_name': 'Sophie Martin',
-                    'author_company': 'Digital Agency',
-                    'author_position': 'CEO',
-                    'content': 'Très satisfaite de la qualité du service. L\'équipe est à l\'écoute et répond rapidement à toutes nos demandes. Une vraie valeur ajoutée pour notre entreprise.',
-                    'rating': 5,
-                    'is_featured': True
-                }
-            ]
-            for data in testimonials_data:
+        testimonials_data = [
+            {
+                'author_name': 'Ahmed Benali',
+                'author_company': 'Tech Solutions Maroc',
+                'author_position': 'Directeur Général',
+                'content': 'Excellent service de domiciliation ! L\'équipe de Shabaka Invest Group est très professionnelle et réactive. Je recommande vivement pour tout entrepreneur souhaitant s\'installer à Marrakech.',
+                'rating': 5,
+                'is_featured': True
+            },
+            {
+                'author_name': 'Karim Tazi',
+                'author_company': 'Import Export KT',
+                'author_position': 'Fondateur',
+                'content': 'Grâce à leurs conseils, j\'ai pu créer mon entreprise rapidement et efficacement. Un accompagnement de qualité du début à la fin. Merci à toute l\'équipe !',
+                'rating': 5,
+                'is_featured': True
+            },
+            {
+                'author_name': 'Sophie Martin',
+                'author_company': 'Digital Agency',
+                'author_position': 'CEO',
+                'content': 'Très satisfaite de la qualité du service. L\'équipe est à l\'écoute et répond rapidement à toutes nos demandes. Une vraie valeur ajoutée pour notre entreprise.',
+                'rating': 5,
+                'is_featured': True
+            },
+            {
+                'author_name': 'Mohammed El Fassi',
+                'author_company': 'Consulting Pro',
+                'author_position': 'Gérant',
+                'content': 'Un partenaire de confiance pour notre développement au Maroc. Leur expertise nous a permis de gagner un temps précieux dans nos démarches administratives.',
+                'rating': 5,
+                'is_featured': True
+            },
+            {
+                'author_name': 'Fatima Zahra Alami',
+                'author_company': 'Mode & Design',
+                'author_position': 'Directrice Artistique',
+                'content': 'Service impeccable et équipe très réactive. Ils ont su comprendre nos besoins spécifiques et nous proposer des solutions adaptées.',
+                'rating': 5,
+                'is_featured': True
+            },
+            {
+                'author_name': 'Jean-Pierre Dubois',
+                'author_company': 'Invest France Maroc',
+                'author_position': 'Président',
+                'content': 'Shabaka Invest nous a accompagnés dans notre implantation au Maroc. Leur connaissance du marché local est un atout majeur.',
+                'rating': 5,
+                'is_featured': True
+            }
+        ]
+        
+        added_count = 0
+        for data in testimonials_data:
+            existing = Testimonial.query.filter_by(author_name=data['author_name'], author_company=data['author_company']).first()
+            if existing is None:
                 testimonial = Testimonial(**data)
                 db.session.add(testimonial)
+                added_count += 1
+        
+        if added_count > 0:
             db.session.commit()
-            print(f"{len(testimonials_data)} témoignages créés.")
+            print(f"{added_count} nouveau(x) témoignage(s) ajouté(s).")
         else:
-            print("Témoignages existent déjà.")
+            print("Tous les témoignages existent déjà.")
 
 def seed_seo_settings():
     """Configure le SEO par défaut pour les pages principales."""

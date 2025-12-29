@@ -190,27 +190,65 @@ def seed_initial_data():
             service = Service(**data)
             db.session.add(service)
     
-    if Testimonial.query.first() is None:
-        testimonials_data = [
-            {
-                'author_name': 'Ahmed Benali',
-                'author_company': 'Tech Solutions Maroc',
-                'author_position': 'Directeur Général',
-                'content': 'Excellent service de domiciliation ! L\'équipe de Shabaka Invest Group est très professionnelle et réactive. Je recommande vivement.',
-                'rating': 5,
-                'is_featured': True
-            },
-            {
-                'author_name': 'Karim Tazi',
-                'author_company': 'Import Export KT',
-                'author_position': 'Fondateur',
-                'content': 'Grâce à leurs conseils, j\'ai pu créer mon entreprise rapidement et efficacement. Un accompagnement de qualité du début à la fin.',
-                'rating': 5,
-                'is_featured': True
-            }
-        ]
-        for data in testimonials_data:
+    testimonials_data = [
+        {
+            'author_name': 'Ahmed Benali',
+            'author_company': 'Tech Solutions Maroc',
+            'author_position': 'Directeur Général',
+            'content': 'Excellent service de domiciliation ! L\'équipe de Shabaka Invest Group est très professionnelle et réactive. Je recommande vivement.',
+            'rating': 5,
+            'is_featured': True
+        },
+        {
+            'author_name': 'Karim Tazi',
+            'author_company': 'Import Export KT',
+            'author_position': 'Fondateur',
+            'content': 'Grâce à leurs conseils, j\'ai pu créer mon entreprise rapidement et efficacement. Un accompagnement de qualité du début à la fin.',
+            'rating': 5,
+            'is_featured': True
+        },
+        {
+            'author_name': 'Sophie Martin',
+            'author_company': 'Digital Agency',
+            'author_position': 'CEO',
+            'content': 'Très satisfaite de la qualité du service. L\'équipe est à l\'écoute et répond rapidement à toutes nos demandes.',
+            'rating': 5,
+            'is_featured': True
+        },
+        {
+            'author_name': 'Mohammed El Fassi',
+            'author_company': 'Consulting Pro',
+            'author_position': 'Gérant',
+            'content': 'Un partenaire de confiance pour notre développement au Maroc. Leur expertise nous a permis de gagner un temps précieux.',
+            'rating': 5,
+            'is_featured': True
+        },
+        {
+            'author_name': 'Fatima Zahra Alami',
+            'author_company': 'Mode & Design',
+            'author_position': 'Directrice Artistique',
+            'content': 'Service impeccable et équipe très réactive. Ils ont su comprendre nos besoins spécifiques.',
+            'rating': 5,
+            'is_featured': True
+        },
+        {
+            'author_name': 'Jean-Pierre Dubois',
+            'author_company': 'Invest France Maroc',
+            'author_position': 'Président',
+            'content': 'Shabaka Invest nous a accompagnés dans notre implantation au Maroc. Leur connaissance du marché local est un atout majeur.',
+            'rating': 5,
+            'is_featured': True
+        }
+    ]
+    for data in testimonials_data:
+        existing = Testimonial.query.filter_by(author_name=data['author_name'], author_company=data['author_company']).first()
+        if existing is None:
             testimonial = Testimonial(**data)
             db.session.add(testimonial)
+    
+    hero = HeroSettings.query.first()
+    if hero:
+        hero.metric1_value = '90%'
+        hero.metric1_label = 'de croissance pour clients'
     
     db.session.commit()
