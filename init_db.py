@@ -160,21 +160,23 @@ def seed_services():
                     'order': 3
                 },
                 {
-                    'name': 'Communication & Marketing',
-                    'slug': 'communication-marketing',
-                    'short_description': 'Stratégies de communication et marketing pour développer votre visibilité.',
-                    'description': '''<h3>Développez votre image de marque</h3>
-<p>Nous vous aidons à construire une image professionnelle et à développer votre visibilité.</p>
-<h4>Nos services :</h4>
+                    'name': 'Marketing et communication',
+                    'slug': 'marketing-communication',
+                    'short_description': 'Développement de stratégies marketing pour optimiser la visibilité et la commercialisation de votre entreprise.',
+                    'description': '''<h3>Amplifiez votre visibilité et commercialisation</h3>
+<p>Nous développons des stratégies marketing complètes pour optimiser la visibilité et la commercialisation de votre entreprise.</p>
+<h4>Nos domaines d'expertise :</h4>
 <ul>
-<li>Création d'identité visuelle</li>
+<li>Stratégie marketing globale</li>
+<li>Création d'identité visuelle et de marque</li>
 <li>Sites web et présence digitale</li>
-<li>Stratégie réseaux sociaux</li>
-<li>Supports de communication</li>
+<li>Stratégie réseaux sociaux et contenu</li>
+<li>Supports de communication et print</li>
+<li>Campagnes publicitaires et promotion</li>
 </ul>''',
                     'icon': 'bullhorn',
-                    'features': 'Identité visuelle,Site web,Réseaux sociaux,Supports print,Stratégie digitale',
-                    'is_featured': False,
+                    'features': 'Stratégie marketing,Identité visuelle,Site web,Réseaux sociaux,Supports digitaux,Gestion de marque',
+                    'is_featured': True,
                     'order': 4
                 }
             ]
