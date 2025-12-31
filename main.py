@@ -11,6 +11,11 @@ from services import seed_initial_data
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "shabaka-invest-secret-key-2024"
 
+# Admin credentials from environment variables
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+ADMIN_MAIL = os.environ.get("ADMIN_MAIL")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+
 csrf = CSRFProtect(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
