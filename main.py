@@ -9,7 +9,9 @@ from routes.admin import admin_bp
 from services import seed_initial_data
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
-app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "shabaka-invest-secret-key-2024"
+app.secret_key = os.environ.get("SESSION_SECRET")
+if not app.secret_key:
+    raise RuntimeError("SESSION_SECRET environment variable is required")
 
 # Admin credentials from environment variables
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
