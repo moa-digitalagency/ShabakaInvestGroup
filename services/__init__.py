@@ -1,3 +1,4 @@
+import os
 from modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User, HeroSettings
 from security import hash_password
 from datetime import datetime
@@ -80,14 +81,20 @@ class HeroService:
         return hero
 
 def seed_initial_data():
-    if User.query.first() is None:
-        admin = User(
-            email='admin@shabakainvest.com',
-            password_hash=hash_password('admin123'),
-            name='Administrateur',
-            role='admin'
-        )
-        db.session.add(admin)
+    admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
+    admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
+    admin_name = os.environ.get('ADMIN_USERNAME', 'Administrateur')
+    
+    existing_admin = User.query.filter_by(email=admin_email).first()
+    if existing_admin is None:
+        if User.query.first() is None:
+            admin = User(
+                email=admin_email,
+                password_hash=hash_password(admin_password),
+                name=admin_name,
+                role='admin'
+            )
+            db.session.add(admin)
     
     if SiteSettings.query.first() is None:
         settings = SiteSettings(

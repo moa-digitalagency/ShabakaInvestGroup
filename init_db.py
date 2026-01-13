@@ -32,21 +32,33 @@ def init_database():
         print("Tables créées avec succès!")
 
 def seed_admin_user():
-    """Crée l'utilisateur administrateur par défaut."""
+    """Crée ou met à jour l'utilisateur administrateur depuis les variables d'environnement."""
     with app.app_context():
-        if User.query.first() is None:
+        admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
+        admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
+        admin_name = os.environ.get('ADMIN_USERNAME', 'Administrateur')
+        
+        existing_admin = User.query.filter_by(role='admin').first()
+        
+        if existing_admin is None:
             admin = User(
-                email='admin@shabakainvest.com',
-                password_hash=hash_password('admin123'),
-                name='Administrateur',
+                email=admin_email,
+                password_hash=hash_password(admin_password),
+                name=admin_name,
                 role='admin'
             )
             db.session.add(admin)
             db.session.commit()
-            print("Administrateur créé: admin@shabakainvest.com / admin123")
-            print("IMPORTANT: Changez ce mot de passe après la première connexion!")
+            print(f"Administrateur créé: {admin_email}")
         else:
-            print("Administrateur existe déjà.")
+            existing_admin.email = admin_email
+            existing_admin.password_hash = hash_password(admin_password)
+            existing_admin.name = admin_name
+            db.session.commit()
+            print(f"Administrateur mis à jour: {admin_email}")
+        
+        if admin_password == 'admin123':
+            print("IMPORTANT: Changez le mot de passe par défaut après la première connexion!")
 
 def seed_site_settings():
     """Configure les paramètres du site par défaut."""
@@ -333,16 +345,22 @@ def run_all():
     seed_seo_settings()
     seed_sample_projects()
     
+    admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
+    admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
+    
     print()
     print("=" * 50)
     print("INITIALISATION TERMINÉE AVEC SUCCÈS!")
     print("=" * 50)
     print()
     print("Accès administrateur:")
-    print("  Email: admin@shabakainvest.com")
-    print("  Mot de passe: admin123")
-    print()
-    print("IMPORTANT: Changez le mot de passe après la première connexion!")
+    print(f"  Email: {admin_email}")
+    if admin_password == 'admin123':
+        print("  Mot de passe: admin123 (DÉFAUT)")
+        print()
+        print("IMPORTANT: Définissez ADMIN_MAIL et ADMIN_PASSWORD dans vos variables d'environnement!")
+    else:
+        print("  Mot de passe: (défini via variable d'environnement ADMIN_PASSWORD)")
 
 if __name__ == '__main__':
     run_all()
