@@ -81,20 +81,21 @@ class HeroService:
         return hero
 
 def seed_initial_data():
-    admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
-    admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
-    admin_name = os.environ.get('ADMIN_USERNAME', 'Administrateur')
+    admin_email = os.environ.get('ADMIN_MAIL')
+    admin_password = os.environ.get('ADMIN_PASSWORD')
+    admin_name = os.environ.get('ADMIN_USERNAME', 'Admin')
     
-    existing_admin = User.query.filter_by(email=admin_email).first()
-    if existing_admin is None:
-        if User.query.first() is None:
-            admin = User(
-                email=admin_email,
-                password_hash=hash_password(admin_password),
-                name=admin_name,
-                role='admin'
-            )
-            db.session.add(admin)
+    if admin_email and admin_password:
+        existing_admin = User.query.filter_by(email=admin_email).first()
+        if existing_admin is None:
+            if User.query.first() is None:
+                admin = User(
+                    email=admin_email,
+                    password_hash=hash_password(admin_password),
+                    name=admin_name,
+                    role='admin'
+                )
+                db.session.add(admin)
     
     if SiteSettings.query.first() is None:
         settings = SiteSettings(

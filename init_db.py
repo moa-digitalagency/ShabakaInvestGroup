@@ -34,9 +34,20 @@ def init_database():
 def seed_admin_user():
     """Crée ou met à jour l'utilisateur administrateur depuis les variables d'environnement."""
     with app.app_context():
-        admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
-        admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
-        admin_name = os.environ.get('ADMIN_USERNAME', 'Administrateur')
+        admin_email = os.environ.get('ADMIN_MAIL')
+        admin_password = os.environ.get('ADMIN_PASSWORD')
+        admin_name = os.environ.get('ADMIN_USERNAME')
+        
+        if not admin_email or not admin_password:
+            print("ERREUR: Variables d'environnement ADMIN_MAIL et ADMIN_PASSWORD requises!")
+            print("Définissez-les avant d'exécuter ce script:")
+            print("  export ADMIN_MAIL='votre-email@example.com'")
+            print("  export ADMIN_PASSWORD='votre-mot-de-passe-securise'")
+            print("  export ADMIN_USERNAME='Votre Nom' (optionnel)")
+            return False
+        
+        if not admin_name:
+            admin_name = 'Admin'
         
         existing_admin = User.query.filter_by(role='admin').first()
         
@@ -57,8 +68,7 @@ def seed_admin_user():
             db.session.commit()
             print(f"Administrateur mis à jour: {admin_email}")
         
-        if admin_password == 'admin123':
-            print("IMPORTANT: Changez le mot de passe par défaut après la première connexion!")
+        return True
 
 def seed_site_settings():
     """Configure les paramètres du site par défaut."""
@@ -345,22 +355,22 @@ def run_all():
     seed_seo_settings()
     seed_sample_projects()
     
-    admin_email = os.environ.get('ADMIN_MAIL', 'admin@shabakainvest.com')
-    admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
+    admin_email = os.environ.get('ADMIN_MAIL')
     
     print()
     print("=" * 50)
     print("INITIALISATION TERMINÉE AVEC SUCCÈS!")
     print("=" * 50)
     print()
-    print("Accès administrateur:")
-    print(f"  Email: {admin_email}")
-    if admin_password == 'admin123':
-        print("  Mot de passe: admin123 (DÉFAUT)")
-        print()
-        print("IMPORTANT: Définissez ADMIN_MAIL et ADMIN_PASSWORD dans vos variables d'environnement!")
+    if admin_email:
+        print("Accès administrateur:")
+        print(f"  Email: {admin_email}")
+        print("  Mot de passe: (défini via ADMIN_PASSWORD)")
     else:
-        print("  Mot de passe: (défini via variable d'environnement ADMIN_PASSWORD)")
+        print("ATTENTION: Aucun administrateur créé!")
+        print("Définissez les variables d'environnement et relancez le script:")
+        print("  export ADMIN_MAIL='votre-email@example.com'")
+        print("  export ADMIN_PASSWORD='mot-de-passe-securise'")
 
 if __name__ == '__main__':
     run_all()
