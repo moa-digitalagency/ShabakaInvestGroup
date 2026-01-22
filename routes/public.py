@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, Response, make_response
 from modeles import db, Service, Testimonial, ContactSubmission, SiteSettings
 from services import ContentService, TestimonialService, ContactService, SettingsService, SEOService, HeroService
+from datetime import datetime
 
 public_bp = Blueprint('public', __name__)
 
@@ -86,3 +87,120 @@ def testimonials():
 @public_bp.route('/mentions-legales')
 def legal():
     return render_template('public/legal.html')
+
+@public_bp.route('/sitemap.xml')
+def sitemap():
+    """Génère un sitemap XML dynamique pour les moteurs de recherche."""
+    pages = []
+    base_url = request.url_root.rstrip('/')
+    now = datetime.utcnow().strftime('%Y-%m-%d')
+    
+    static_pages = [
+        {'loc': '/', 'priority': '1.0', 'changefreq': 'weekly'},
+        {'loc': '/services', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'loc': '/domiciliation', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': '/conseils', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': '/a-propos', 'priority': '0.7', 'changefreq': 'monthly'},
+        {'loc': '/contact', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': '/temoignages', 'priority': '0.6', 'changefreq': 'weekly'},
+    ]
+    
+    for page in static_pages:
+        pages.append({
+            'loc': base_url + page['loc'],
+            'lastmod': now,
+            'changefreq': page['changefreq'],
+            'priority': page['priority']
+        })
+    
+    services = ContentService.get_all_services()
+    for service in services:
+        if service.is_active:
+            pages.append({
+                'loc': f"{base_url}/services/{service.slug}",
+                'lastmod': service.updated_at.strftime('%Y-%m-%d') if service.updated_at else now,
+                'changefreq': 'monthly',
+                'priority': '0.7'
+            })
+    
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    for page in pages:
+        xml_content += '  <url>\n'
+        xml_content += f'    <loc>{page["loc"]}</loc>\n'
+        xml_content += f'    <lastmod>{page["lastmod"]}</lastmod>\n'
+        xml_content += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
+        xml_content += f'    <priority>{page["priority"]}</priority>\n'
+        xml_content += '  </url>\n'
+    
+    xml_content += '</urlset>'
+    
+    response = make_response(xml_content)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
+
+@public_bp.route('/robots.txt')
+def robots():
+    """Génère le fichier robots.txt pour contrôler l'indexation."""
+    base_url = request.url_root.rstrip('/')
+    
+    robots_content = """# Robots.txt pour Shabaka Invest Group
+# https://www.robotstxt.org/
+
+# Autoriser tous les robots standards
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin
+Disallow: /static/uploads/
+Disallow: /*?*
+
+# Autoriser les robots IA pour l'indexation
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Bloquer les scrapers agressifs
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap
+Sitemap: {base_url}/sitemap.xml
+""".format(base_url=base_url)
+    
+    response = make_response(robots_content)
+    response.headers['Content-Type'] = 'text/plain'
+    return response
