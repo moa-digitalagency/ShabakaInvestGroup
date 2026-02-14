@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Contenu indisponible - Shabaka Invest Group{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl w-full text-center space-y-8">
+        <!-- Lottie Animation Placeholder -->
+        <div class="w-64 h-64 mx-auto mb-8" id="lottie-451">
+            <!-- Integrate 451-burning-book.json here -->
+            <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center animate-pulse border-2 border-red-900">
+                <span class="text-red-500 font-mono">Lottie: Burning Book</span>
+            </div>
+        </div>
+
+        <h1 class="text-4xl font-mono font-bold text-red-500 tracking-wider">
+            ERREUR 451
+        </h1>
+        <h2 class="text-2xl font-bold text-white">
+            Indisponible pour raisons légales
+        </h2>
+
+        <div class="bg-gray-800 p-6 rounded-lg border-l-4 border-red-500 text-left">
+            <p class="text-gray-300 font-mono mb-4">
+                "Ce n'était pas un plaisir de brûler. C'était un plaisir spécial de voir les choses mangées, de voir les choses noircies et changées." — Ray Bradbury, Fahrenheit 451
+            </p>
+            <p class="text-gray-400 text-sm">
+                Cette page existe peut-être, mais nous ne pouvons pas vous la montrer pour le moment en raison de restrictions légales ou de censure géographique.
+            </p>
+        </div>
+
+        <div class="mt-8 flex justify-center space-x-4">
+            <a href="{{ url_for('public.home') }}" class="text-gray-400 hover:text-white underline transition">
+                Retour à la sécurité
+            </a>
+            <span class="text-gray-600">|</span>
+            <a href="https://wa.me/{{ whatsapp_number }}" class="text-gray-400 hover:text-white underline transition">
+                Contacter l'autorité (Support)
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@ import os
 from modeles import db, Service, Page, Testimonial, ContactSubmission, SiteSettings, SEOSettings, User, HeroSettings
 from security import hash_password
 from datetime import datetime
+from config import WHATSAPP_NUMBER
 
 class ContentService:
     @staticmethod
@@ -103,7 +104,7 @@ def seed_initial_data():
             email='contact@shabakainvest.com',
             phone='+212 524 000 000',
             address='Avenue Mohammed V, Guéliz, Marrakech 40000, Maroc',
-            whatsapp='+212600000000',
+            whatsapp=WHATSAPP_NUMBER,
             footer_text='Shabaka Invest Group - Votre partenaire de confiance pour la domiciliation et le développement de votre entreprise à Marrakech.'
         )
         db.session.add(settings)
