@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Mauvaise Requête - Shabaka Invest Group{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 text-center">
+        <!-- Lottie Animation Placeholder -->
+        <div class="w-64 h-64 mx-auto mb-8" id="lottie-400">
+            <!-- Integrate 400-confused-robot.json here -->
+            <div class="w-full h-full bg-blue-100 rounded-full flex items-center justify-center animate-bounce">
+                <span class="text-blue-500 font-bold">Lottie: Confused Robot</span>
+            </div>
+        </div>
+
+        <h1 class="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+            Erreur 400
+        </h1>
+        <h2 class="text-xl font-medium text-gray-600">
+            J'ai presque compris...
+        </h2>
+
+        <p class="mt-4 text-base text-gray-500">
+            Mais ta demande est mal fichue. C'est une erreur de syntaxe client, pas de ma faute (le serveur).
+        </p>
+
+        <div class="mt-8 space-y-4">
+             <p class="text-sm text-gray-400">Essaie de reformuler ou clique sur le bouton ci-dessous si tu veux qu'on oublie cet incident.</p>
+            <a href="{{ url_for('public.home') }}" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                Retourner à l'accueil
+            </a>
+             <a href="https://wa.me/{{ whatsapp_number }}" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                Expliquer mon problème au support
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

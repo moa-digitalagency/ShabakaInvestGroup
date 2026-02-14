@@ -6,6 +6,7 @@ from modeles import db, User
 from security import login_manager
 from routes.public import public_bp
 from routes.admin import admin_bp
+from routes.errors import errors_bp
 from services import seed_initial_data
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -36,6 +37,7 @@ def load_user(user_id):
 
 app.register_blueprint(public_bp)
 app.register_blueprint(admin_bp)
+app.register_blueprint(errors_bp)
 
 @app.after_request
 def add_header(response):
