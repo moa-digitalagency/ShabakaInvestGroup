@@ -17,6 +17,7 @@ Ce script va:
 
 import os
 import sys
+from sqlalchemy import inspect, text
 
 os.environ.setdefault('DATABASE_URL', os.getenv('DATABASE_URL', ''))
 
@@ -25,11 +26,35 @@ from modeles import db, User, Service, Testimonial, SiteSettings, HeroSettings, 
 from security import hash_password
 
 def init_database():
-    """Initialise le schéma de la base de données."""
+    """Initialise le schéma de la base de données et gère les migrations simples."""
     with app.app_context():
-        print("Création des tables de la base de données...")
+        print("Vérification et mise à jour du schéma de la base de données...")
+        inspector = inspect(db.engine)
+
+        # Créer les tables manquantes
         db.create_all()
-        print("Tables créées avec succès!")
+
+        # Vérifier les colonnes manquantes dans les tables existantes
+        for table_name in db.metadata.tables:
+            if inspector.has_table(table_name):
+                existing_columns = [c['name'] for c in inspector.get_columns(table_name)]
+                model = db.metadata.tables[table_name]
+
+                for column in model.columns:
+                    if column.name not in existing_columns:
+                        print(f"  + Ajout de la colonne manquante: {table_name}.{column.name}")
+                        try:
+                            # Compilation du type de colonne pour le dialecte actuel
+                            col_type = column.type.compile(db.engine.dialect)
+                            stmt = f"ALTER TABLE {table_name} ADD COLUMN {column.name} {col_type}"
+
+                            with db.engine.connect() as conn:
+                                conn.execute(text(stmt))
+                                conn.commit()
+                        except Exception as e:
+                            print(f"ERREUR lors de l'ajout de la colonne {table_name}.{column.name}: {e}")
+
+        print("Schéma de base de données vérifié!")
 
 def seed_admin_user():
     """Crée ou met à jour l'utilisateur administrateur depuis les variables d'environnement."""

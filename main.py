@@ -45,8 +45,11 @@ def add_header(response):
     return response
 
 with app.app_context():
-    db.create_all()
-    seed_initial_data()
+    try:
+        db.create_all()
+        seed_initial_data()
+    except Exception as e:
+        print(f"Warning: Database initialization failed during startup (possibly due to migration needed): {e}")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
