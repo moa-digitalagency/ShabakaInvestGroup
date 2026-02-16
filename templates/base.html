@@ -15,82 +15,10 @@
     <meta name="description" content="Shabaka Invest Group - Domiciliation et création d'entreprises à Marrakech">
     {% endif %}
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/tailwind_public.js') }}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f4ff',
-                            100: '#e0e9ff',
-                            200: '#c7d7ff',
-                            300: '#a4b8ff',
-                            400: '#7b92ff',
-                            500: '#5a6cff',
-                            600: '#3d4fd9',
-                            700: '#2d3bb8',
-                            800: '#1e2796',
-                            900: '#0d1a5e',
-                        },
-                        accent: {
-                            light: '#e8f5e9',
-                            DEFAULT: '#4CAF50',
-                            lime: '#c6ff00'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .hero-stripe {
-            position: absolute;
-            height: 100%;
-            width: 80px;
-            transform: skewX(-15deg);
-        }
-        .service-card {
-            border: 2px solid #e5e7eb;
-            transition: all 0.3s;
-        }
-        .service-card:hover {
-            border-color: #0d1a5e;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .nav-btn {
-            background: linear-gradient(135deg, #0d1a5e 0%, #1e2796 100%);
-        }
-        .section-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border: 2px solid #0d1a5e;
-            border-radius: 25px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #0d1a5e 0%, #1e2796 50%, #2d3bb8 100%);
-            position: relative;
-        }
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     {% if site_settings and site_settings.custom_header_code %}
     {{ site_settings.custom_header_code | safe }}
@@ -277,57 +205,11 @@
     </div>
 
     <script>
-        const whatsappNumber = '{{ site_settings.whatsapp|replace("+", "")|replace(" ", "") if site_settings and site_settings.whatsapp else "212600000000" }}';
-        
-        function openDevisModal() {
-            document.getElementById('devisModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeDevisModal() {
-            document.getElementById('devisModal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-        
-        function submitDevis(e) {
-            e.preventDefault();
-            const nom = document.getElementById('devis_nom').value;
-            const tel = document.getElementById('devis_tel').value;
-            const service = document.getElementById('devis_service').value;
-            const message = document.getElementById('devis_message').value;
-            
-            let whatsappMessage = `Bonjour Shabaka Invest,\n\n`;
-            whatsappMessage += `Je suis *${nom}*\n`;
-            whatsappMessage += `Téléphone: ${tel}\n`;
-            if (service) {
-                whatsappMessage += `Service souhaité: ${service}\n`;
-            }
-            if (message) {
-                whatsappMessage += `\nMessage: ${message}\n`;
-            }
-            whatsappMessage += `\nJe souhaite demander un devis. Merci de me recontacter.`;
-            
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-            closeDevisModal();
-            document.getElementById('devisForm').reset();
-        }
-        
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeDevisModal();
-        });
-        
-        setTimeout(function() {
-            document.querySelectorAll('.flash-message').forEach(function(el) {
-                el.style.opacity = '0';
-                setTimeout(function() { el.remove(); }, 300);
-            });
-        }, 5000);
+        window.SHABAKA_CONFIG = {
+            whatsappNumber: '{{ site_settings.whatsapp|replace("+", "")|replace(" ", "") if site_settings and site_settings.whatsapp else "212600000000" }}'
+        };
     </script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
     {% block extra_js %}{% endblock %}
     {% if site_settings and site_settings.custom_footer_code %}
     {{ site_settings.custom_footer_code | safe }}
