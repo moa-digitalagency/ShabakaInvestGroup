@@ -1,120 +1,75 @@
-# Shabaka Invest Group - Guide d'Utilisation (Admin)
+[ 🇫🇷 Français ](ShabakaInvest_user_guide.md) | [ 🇬🇧 English ](ShabakaInvest_user_guide_en.md)
 
-Bienvenue dans le guide d'administration de votre site web **Shabaka Invest Group**. Ce manuel vous explique comment gérer le contenu, les services, les témoignages et les paramètres de votre site en toute autonomie.
+# Guide Utilisateur - Administration Shabaka Invest Group
+
+Ce guide explique comment gérer le contenu du site via le tableau de bord administrateur sécurisé.
+
+---
 
 ## 1. Accès à l'Administration
-
-Pour accéder à votre tableau de bord, rendez-vous sur l'URL suivante :
-`https://votre-site.com/admin/login`
-
-1.  Saisissez votre **Email** administrateur.
-2.  Saisissez votre **Mot de passe**.
+Pour accéder au panneau de gestion :
+1.  Allez sur l'URL : `votre-site.com/admin/login`
+2.  Entrez votre **Email** et **Mot de passe** administrateur.
 3.  Cliquez sur "Se connecter".
 
-> **Note :** En cas d'oubli de mot de passe, contactez le développeur ou l'administrateur technique.
+> **Note :** Après 3 tentatives infructueuses, l'accès peut être temporairement bloqué par sécurité.
 
 ---
 
 ## 2. Tableau de Bord (Dashboard)
-
-Une fois connecté, vous arrivez sur le tableau de bord. Il vous donne une vue d'ensemble :
-*   **Statistiques :** Nombre de services actifs, témoignages clients et messages reçus.
-*   **Messages Récents :** Liste des derniers formulaires de contact reçus.
-*   **Actions Rapides :** Boutons pour ajouter un service ou lire les messages.
-
----
-
-## 3. Gestion des Services
-
-C'est ici que vous modifiez les offres présentées sur le site (ex: "Création d'entreprise", "Domiciliation").
-
-### Ajouter un nouveau service
-1.  Dans le menu latéral, cliquez sur **Services** > **Nouveau Service**.
-2.  Remplissez le formulaire :
-    *   **Nom :** Le titre du service (ex: "Conseil Fiscal").
-    *   **Image :** Une photo représentative (JPG/PNG).
-    *   **Description courte :** Une phrase d'accroche pour la page d'accueil.
-    *   **Description complète :** Le détail de l'offre. Vous pouvez mettre du texte en gras, des listes, etc.
-    *   **Fonctionnalités :** Liste des points forts (un par ligne).
-    *   **Icône :** Le nom de l'icône FontAwesome (ex: `fa-briefcase`).
-3.  **Options de publication :**
-    *   Cochez **Publié** pour le rendre visible.
-    *   Cochez **En vedette** pour l'afficher sur la page d'accueil.
-4.  Cliquez sur **Enregistrer**.
-
-### Modifier ou Supprimer un service
-1.  Cliquez sur **Services** dans le menu.
-2.  Dans la liste, cliquez sur l'icône **Crayon** pour modifier ou **Corbeille** pour supprimer.
+Une fois connecté, vous arrivez sur le tableau de bord qui affiche :
+- Le nombre total de services, témoignages et messages.
+- Les derniers messages reçus via le formulaire de contact.
+- Un menu latéral pour naviguer vers les différentes sections.
 
 ---
 
-## 4. Gestion des Témoignages
+## 3. Gestion du Contenu
 
-Pour afficher les avis de vos clients satisfaits.
+### A. Gérer les Services (`/admin/services`)
+C'est ici que vous définissez les offres visibles sur le site.
+- **Ajouter :** Cliquez sur "Nouveau Service". Remplissez le nom, la description courte (pour l'aperçu), la description complète, et ajoutez une image.
+- **Modifier :** Cliquez sur l'icône "Crayon" à côté d'un service.
+- **Supprimer :** Cliquez sur l'icône "Corbeille". **Attention, cette action est définitive.**
+- **Ordre :** Vous pouvez réorganiser l'affichage des services en modifiant leur numéro d'ordre.
 
-1.  Cliquez sur **Témoignages**.
-2.  Cliquez sur **Ajouter**.
-3.  Remplissez :
-    *   **Nom du client.**
-    *   **Entreprise / Poste** (ex: "CEO chez StartupXYZ").
-    *   **Message :** L'avis du client.
-    *   **Note :** Nombre d'étoiles (1 à 5).
-    *   **Photo :** Avatar du client (optionnel).
-4.  Cochez **Visible sur l'accueil** si vous voulez le mettre en avant.
+### B. Gérer les Témoignages (`/admin/testimonials`)
+Ajoutez les avis de vos clients pour renforcer la crédibilité.
+- **Note :** De 1 à 5 étoiles.
+- **Mise en avant :** Cochez "Mettre en avant" pour afficher ce témoignage sur la page d'accueil.
 
----
-
-## 5. Gestion des Messages (Contacts)
-
-Lorsque un visiteur remplit le formulaire de contact, vous recevez le message ici.
-
-1.  Cliquez sur **Messages**.
-2.  Les messages **non lus** apparaissent en gras.
-3.  Cliquez sur l'icône **Oeil** pour lire le détail.
-4.  Une fois lu, le message est marqué comme "Traité".
-5.  Vous pouvez le supprimer si nécessaire.
+### C. Gérer les Projets (`/admin/projects`)
+Mettez en valeur vos réalisations.
+- Chaque projet peut avoir un client associé, une catégorie, et un lien externe.
 
 ---
 
-## 6. Personnalisation du Site (Paramètres)
-
-Cette section vous permet de modifier les informations globales sans toucher au code.
-
-### Informations de Contact
-*   Allez dans **Paramètres** > **Général**.
-*   Modifiez l'adresse email, le téléphone, l'adresse physique.
-*   Ces changements se répercutent automatiquement dans le pied de page (footer) et la page Contact.
-
-### Réseaux Sociaux
-*   Remplissez les liens vers vos pages (Facebook, LinkedIn, Instagram...).
-*   Si vous laissez un champ vide, l'icône correspondante disparaîtra du site.
-
-### Page d'Accueil (Hero Section)
-*   Allez dans **Hero** (ou "Accueil").
-*   Modifiez le **Titre principal** et le **Sous-titre**.
-*   Changez l'**Image de fond** (upload ou URL).
-*   Configurez les boutons d'action (ex: changer "Nos Services" par "Découvrir").
-*   Activez ou désactivez le bouton **WhatsApp** pour la prise de contact directe.
+## 4. Gestion des Contacts (`/admin/contacts`)
+Tous les messages envoyés via le formulaire de contact du site atterrissent ici.
+- **Lecture :** Cliquez sur un message pour voir tous les détails (Nom, Email, Téléphone, Message).
+- **Statut :** Un message non lu apparaît en gras. Il passe automatiquement en "Lu" une fois ouvert.
+- **Action :** Vous pouvez répondre directement par email en cliquant sur l'adresse de l'expéditeur.
 
 ---
 
-## 7. Optimisation SEO (Référencement)
-
-Pour améliorer votre position sur Google, vous pouvez modifier les balises Meta de chaque page.
-
-1.  Allez dans **SEO**.
-2.  Choisissez la page à modifier (ex: `home`, `services`, `contact`).
-3.  Remplissez :
-    *   **Méta Titre :** Le titre bleu qui apparaît dans les résultats Google (max 60 caractères).
-    *   **Méta Description :** Le texte gris sous le titre (max 160 caractères).
-    *   **Mots-clés :** Liste de mots séparés par des virgules.
-4.  Cliquez sur **Sauvegarder**.
+## 5. Configuration du Site (`/admin/settings`)
+Cette section contrôle les informations globales du site.
+- **Identité :** Changez le nom du site, le logo et le favicon.
+- **Contact :** Mettez à jour l'email, le téléphone et l'adresse affichés dans le pied de page.
+- **Réseaux Sociaux :** Ajoutez ou modifiez les liens vers vos pages Facebook, LinkedIn, etc.
+- **Scripts :** Ajoutez ici vos codes de suivi (Google Analytics, Pixel Facebook) sans toucher au code source.
 
 ---
 
-## 8. Gestion de votre Profil
+## 6. Optimisation SEO (`/admin/seo`)
+Pour améliorer votre visibilité sur Google, configurez chaque page :
+- **Méta Titre :** Le titre bleu qui apparaît dans les résultats de recherche.
+- **Méta Description :** Le petit texte gris sous le titre.
+- **Image Open Graph :** L'image qui s'affiche lorsque vous partagez le lien sur WhatsApp ou Facebook.
 
-Pour changer votre mot de passe administrateur :
-1.  Cliquez sur votre nom en haut à droite > **Profil**.
-2.  Modifiez votre Email ou votre Nom.
-3.  Pour changer le mot de passe, remplissez "Nouveau mot de passe" et confirmez avec votre mot de passe actuel.
+---
+
+## 7. Médiathèque (`/admin/media`)
+Gérez tous vos fichiers images et documents.
+- Vous pouvez uploader de nouvelles images ici pour les utiliser plus tard dans vos services ou articles.
+- Supprimez les fichiers obsolètes pour libérer de l'espace.
