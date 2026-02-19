@@ -1,130 +1,88 @@
-# Shabaka Invest Group - Plateforme Digitale
+![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg) ![Framework](https://img.shields.io/badge/flask-3.0+-green.svg) ![Database](https://img.shields.io/badge/database-SQLAlchemy-orange.svg) ![Status](https://img.shields.io/badge/status-Private%2FInternal-red.svg) ![License](https://img.shields.io/badge/license-Proprietary-black.svg) ![Owner](https://img.shields.io/badge/owner-MOA%20Digital%20Agency-purple.svg)
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/Framework-Flask-orange.svg)](https://flask.palletsprojects.com/)
-[![License](https://img.shields.io/badge/license-Proprietary-red.svg)]()
+[ 🇫🇷 Français ](README.md) | [ 🇬🇧 English ](README_en.md)
 
-> **Shabaka Invest Group** est une plateforme moderne de gestion de services d'investissement et de domiciliation d'entreprises à Marrakech. Ce projet combine une vitrine commerciale haut de gamme avec un CMS complet pour une autonomie totale des équipes.
+# Shabaka Invest Group - Plateforme de Domiciliation & Services
 
----
+> **PROJET PRIVÉ & PROPRIÉTAIRE** - MOA Digital Agency (myoneart.com)
+> Auteur : Aisance KALONJI.
+> Usage strictement interne. Toute distribution interdite.
 
-## 📖 Table des Matières
-- [Aperçu](#-aperçu)
-- [Fonctionnalités Clés](#-fonctionnalités-clés)
-- [Stack Technique](#-stack-technique)
-- [Démarrage Rapide](#-démarrage-rapide)
-- [Documentation Complète](#-documentation-complète)
-- [Structure du Projet](#-structure-du-projet)
+## Description
+**Shabaka Invest Group** est une plateforme CMS sur-mesure développée pour gérer l'activité de domiciliation et de création d'entreprises au Maroc. Elle dispose d'une interface publique (Front-Office) optimisée pour la conversion et le SEO, et d'une interface d'administration (Back-Office) complète pour la gestion des contenus et des prospects.
 
----
+## Architecture Technique
 
-## 🚀 Aperçu
+```mermaid
+graph TD
+    Client[Navigateur Client] -->|HTTP/HTTPS| Flask[App Flask]
 
-Cette application web sur mesure permet à **Shabaka Invest Group** de présenter ses services (domiciliation, création d'entreprise, conseil) et de capter des leads qualifiés via des formulaires intelligents et une intégration WhatsApp directe. L'interface d'administration offre un contrôle total sur le contenu sans nécessiter d'intervention technique.
+    subgraph "Backend (Flask)"
+        Flask -->|Route| Blueprints{Blueprints}
+        Blueprints -->|/admin| AdminBP[Admin Blueprint]
+        Blueprints -->|/| PublicBP[Public Blueprint]
 
----
+        AdminBP -->|Logique| Services[Services Métier]
+        PublicBP -->|Logique| Services
 
-## ✨ Fonctionnalités Clés
+        Services -->|ORM| Models[Modèles SQLAlchemy]
+    end
 
-*   **Interface Publique Dynamique :** Hero section configurable, catalogue de services, témoignages clients.
-*   **CMS Intégré (Admin Panel) :**
-    *   Gestion complète des Services, Projets et Témoignages.
-    *   Upload et gestion des Médias (Images/Docs).
-    *   Configuration SEO avancée par page (Meta tags, Open Graph).
-*   **Lead Generation :**
-    *   Formulaire de contact avec notification admin.
-    *   Génération de liens WhatsApp pré-remplis pour les devis.
-*   **Performance & SEO :**
-    *   Génération automatique de Sitemap XML et Robots.txt.
-    *   Architecture optimisée pour le chargement rapide.
+    Models -->|SQL| DB[(Base de Données)]
 
-> 👉 **[Voir la liste exhaustive des fonctionnalités](docs/ShabakaInvest_features_full_list.md)**
+    subgraph "Frontend"
+        Templates[Templates Jinja2]
+        Tailwind[Tailwind CSS (CDN)]
+    end
 
----
+    PublicBP --> Templates
+    AdminBP --> Templates
+    Templates -.-> Client
+```
 
-## 🛠 Stack Technique
+## Table des Matières
+1.  [Fonctionnalités Clés](#fonctionnalités-clés)
+2.  [Installation & Démarrage](#installation--démarrage)
+3.  [Documentation Détaillée](#documentation-détaillée)
 
-Ce projet repose sur une architecture robuste et maintenable :
+## Fonctionnalités Clés
+*   **CMS Dynamique :** Gestion complète des services, témoignages et projets.
+*   **SEO Automatisé :** Génération de sitemap.xml, robots.txt et méta-données configurables par page.
+*   **CRM Léger :** Centralisation des demandes de contact et suivi (lu/non lu).
+*   **Médiathèque :** Gestion centralisée des uploads (images/documents).
+*   **Sécurité :** Authentification forte, CSRF protection, assainissement des entrées.
 
-| Composant | Technologie |
-|---|---|
-| **Backend** | Python 3, Flask, SQLAlchemy |
-| **Frontend** | Jinja2, Tailwind CSS (CDN), AlpineJS/Vanilla JS |
-| **Base de Données** | PostgreSQL (Prod) / SQLite (Dev) |
-| **Sécurité** | Flask-Login, CSRF Protection, Password Hashing |
-| **Déploiement** | Gunicorn, Nginx, Docker Ready |
-
-> 👉 **[Voir l'architecture technique détaillée](docs/ShabakaInvest_technical_architecture.md)**
-
----
-
-## ⚡ Démarrage Rapide
+## Installation & Démarrage
 
 ### Prérequis
-*   Python 3.10+
-*   pip / venv
+*   Python 3.11 ou supérieur
+*   pip (Gestionnaire de paquets)
 
 ### Installation
-
-1.  **Cloner le dépôt :**
-    ```bash
-    git clone https://github.com/votre-org/shabaka-invest.git
-    cd shabaka-invest
-    ```
-
-2.  **Configurer l'environnement virtuel :**
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # Sur Windows: venv\Scripts\activate
-    ```
-
-3.  **Installer les dépendances :**
+1.  Cloner le dépôt (accès restreint).
+2.  Installer les dépendances :
     ```bash
     pip install -r requirements.txt
     ```
+3.  Configurer les variables d'environnement (voir `config.py`).
 
-4.  **Initialiser la base de données :**
+### Démarrage
+1.  Initialiser la base de données :
     ```bash
     python init_db.py
     ```
-
-5.  **Lancer le serveur de développement :**
+2.  Lancer le serveur de développement :
     ```bash
     python main.py
     ```
-    Accédez au site sur `http://localhost:5000`
+    L'application sera accessible sur `http://localhost:5000`.
 
-> 👉 **[Guide de déploiement complet](docs/ShabakaInvest_deployment.md)**
+## Documentation Détaillée
+Toute la documentation technique et fonctionnelle se trouve dans le dossier `docs/`.
 
----
-
-## 📚 Documentation Complète
-
-Toute la documentation technique et utilisateur se trouve dans le dossier [`docs/`](docs/).
-
-*   📄 **[Bible des Fonctionnalités](docs/ShabakaInvest_features_full_list.md)** : Détail exhaustif de chaque feature.
-*   🏗 **[Architecture Technique](docs/ShabakaInvest_technical_architecture.md)** : Modèles de données, sécurité, structure.
-*   📘 **[Guide Utilisateur (Admin)](docs/ShabakaInvest_user_guide.md)** : Manuel pour les gestionnaires de contenu.
-*   🚀 **[Guide de Déploiement](docs/ShabakaInvest_deployment.md)** : Installation serveur et configuration env.
+*   📂 **[Bible des Fonctionnalités](docs/ShabakaInvest_features_full_list.md)** : Liste exhaustive de toutes les features.
+*   🛠 **[Spécifications Techniques](docs/ShabakaInvest_technical_specs.md)** : Stack, Architecture, Sécurité.
+*   📖 **[Guide Utilisateur](docs/ShabakaInvest_user_guide.md)** : Manuel pour l'administration du site.
 
 ---
-
-## 📂 Structure du Projet
-
-```bash
-/
-├── docs/                # Documentation (markdown)
-├── modeles/             # Modèles de base de données (SQLAlchemy)
-├── routes/              # Contrôleurs (Admin & Public)
-├── services/            # Logique métier
-├── static/              # Assets (CSS, JS, Uploads)
-├── templates/           # Vues HTML (Jinja2)
-├── main.py              # Point d'entrée Flask
-└── requirements.txt     # Dépendances
-```
-
----
-
-© 2025 Shabaka Invest Group. Tous droits réservés.
+Copyright © 2024 MOA Digital Agency. Tous droits réservés.
