@@ -32,7 +32,7 @@ graph TD
 
     subgraph "Frontend"
         Templates[Templates Jinja2]
-        Tailwind[Tailwind CSS (CDN)]
+        Tailwind["Tailwind CSS (CDN)"]
     end
 
     PublicBP --> Templates
