@@ -77,6 +77,7 @@ def seed_admin_user():
         existing_admin = User.query.filter_by(role='admin').first()
         
         if existing_admin is None:
+            # Create new admin if none exists
             admin = User(
                 email=admin_email,
                 password_hash=hash_password(admin_password),
@@ -87,11 +88,13 @@ def seed_admin_user():
             db.session.commit()
             print(f"Administrateur créé: {admin_email}")
         else:
+            # Overwrite existing admin with env variables
+            print(f"Mise à jour de l'administrateur existant ({existing_admin.email}) vers {admin_email}...")
             existing_admin.email = admin_email
             existing_admin.password_hash = hash_password(admin_password)
             existing_admin.name = admin_name
             db.session.commit()
-            print(f"Administrateur mis à jour: {admin_email}")
+            print(f"Administrateur mis à jour avec succès: {admin_email}")
         
         return True
 

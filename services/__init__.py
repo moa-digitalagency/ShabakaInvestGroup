@@ -87,16 +87,23 @@ def seed_initial_data():
     admin_name = os.environ.get('ADMIN_USERNAME', 'Admin')
     
     if admin_email and admin_password:
-        existing_admin = User.query.filter_by(email=admin_email).first()
-        if existing_admin is None:
-            if User.query.first() is None:
-                admin = User(
-                    email=admin_email,
-                    password_hash=hash_password(admin_password),
-                    name=admin_name,
-                    role='admin'
-                )
-                db.session.add(admin)
+        # Check if an admin already exists (by role)
+        existing_admin = User.query.filter_by(role='admin').first()
+
+        if existing_admin:
+            # Update existing admin
+            existing_admin.email = admin_email
+            existing_admin.password_hash = hash_password(admin_password)
+            existing_admin.name = admin_name
+        else:
+            # Create new admin if none exists
+            admin = User(
+                email=admin_email,
+                password_hash=hash_password(admin_password),
+                name=admin_name,
+                role='admin'
+            )
+            db.session.add(admin)
     
     if SiteSettings.query.first() is None:
         settings = SiteSettings(
