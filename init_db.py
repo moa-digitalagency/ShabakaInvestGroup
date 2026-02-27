@@ -17,7 +17,7 @@ Ce script va:
 
 import os
 import sys
-from sqlalchemy import inspect, text
+from sqlalchemy import inspect, text, Boolean, Integer, Float, String, Text, Numeric, BigInteger, SmallInteger
 
 os.environ.setdefault('DATABASE_URL', os.getenv('DATABASE_URL', ''))
 
@@ -46,7 +46,23 @@ def init_database():
                         try:
                             # Compilation du type de colonne pour le dialecte actuel
                             col_type = column.type.compile(db.engine.dialect)
-                            stmt = f"ALTER TABLE {table_name} ADD COLUMN {column.name} {col_type}"
+
+                            # Determine default value logic for NOT NULL columns
+                            default_clause = ""
+                            if not column.nullable and column.server_default is None:
+                                if isinstance(column.type, (String, Text)):
+                                    default_clause = " DEFAULT ''"
+                                elif isinstance(column.type, (Integer, BigInteger, SmallInteger)):
+                                    default_clause = " DEFAULT 0"
+                                elif isinstance(column.type, (Float, Numeric)):
+                                    default_clause = " DEFAULT 0.0"
+                                elif isinstance(column.type, Boolean):
+                                    # SQLAlchemy Boolean usually maps to 0/1 or FALSE/TRUE depending on dialect
+                                    # Using '0' is generally safe for int-based booleans, 'FALSE' for others.
+                                    # For SQLite/MySQL/PG, 0 or FALSE usually works. Let's try 0 (FALSE).
+                                    default_clause = " DEFAULT 0"
+
+                            stmt = f"ALTER TABLE {table_name} ADD COLUMN {column.name} {col_type}{default_clause}"
 
                             with db.engine.connect() as conn:
                                 conn.execute(text(stmt))
@@ -73,25 +89,42 @@ def seed_admin_user():
         
         if not admin_name:
             admin_name = 'Admin'
-        
-        existing_admin = User.query.filter_by(role='admin').first()
-        
-        if existing_admin is None:
-            admin = User(
-                email=admin_email,
-                password_hash=hash_password(admin_password),
-                name=admin_name,
-                role='admin'
-            )
-            db.session.add(admin)
+
+        # 1. Check if user with admin_email exists
+        existing_user_by_email = User.query.filter_by(email=admin_email).first()
+
+        if existing_user_by_email:
+            # Update existing user found by email
+            existing_user_by_email.name = admin_name
+            existing_user_by_email.password_hash = hash_password(admin_password)
+            existing_user_by_email.role = 'admin'
             db.session.commit()
-            print(f"Administrateur créé: {admin_email}")
-        else:
-            existing_admin.email = admin_email
-            existing_admin.password_hash = hash_password(admin_password)
-            existing_admin.name = admin_name
+            print(f"Administrateur mis à jour (trouvé par email): {admin_email}")
+            return True
+
+        # 2. Check if ANY admin exists (to overwrite/claim the admin slot)
+        existing_admin_by_role = User.query.filter_by(role='admin').first()
+
+        if existing_admin_by_role:
+            # Overwrite the existing admin
+            print(f"Mise à jour de l'administrateur existant (role='admin'): {existing_admin_by_role.email} -> {admin_email}")
+            existing_admin_by_role.email = admin_email
+            existing_admin_by_role.name = admin_name
+            existing_admin_by_role.password_hash = hash_password(admin_password)
             db.session.commit()
-            print(f"Administrateur mis à jour: {admin_email}")
+            print(f"Administrateur mis à jour (écrasement): {admin_email}")
+            return True
+
+        # 3. Create new admin if none exists
+        admin = User(
+            email=admin_email,
+            password_hash=hash_password(admin_password),
+            name=admin_name,
+            role='admin'
+        )
+        db.session.add(admin)
+        db.session.commit()
+        print(f"Administrateur créé: {admin_email}")
         
         return True
 
